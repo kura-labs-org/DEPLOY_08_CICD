@@ -8,3 +8,4 @@ sudo apt install openjdk-11-jdk -y
 sudo apt install jenkins -y
 sudo systemctl daemon-reload
 sudo systemctl start jenkins
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
