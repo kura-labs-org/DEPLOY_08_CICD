@@ -40,3 +40,28 @@
     set_fact: 
       SG1_ID: '{{sg1.security_groups[0].group_id}}'
   - debug: var=SG1_ID
+  - name: JenkinsAgent SG GROUP
+    amazon.aws.ec2_group:
+      name: JenkinsAgent
+      description: an example EC2 group
+      vpc_id: '{{vpcid}}' 
+      region: '{{region}}'
+      rules:
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "{{vpcBlock}}"
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "{{ publicIP + '/32' }}"
+  - name: Grab SG1 ID
+    amazon.aws.ec2_group_info:
+      filters:
+        group-name: JenkinsAgent
+    register: sg2
+  - name: Assigns sg2_ID as variable
+    set_fact: 
+      SG2_ID: '{{sg2.security_groups[0].group_id}}'
+  - debug: var=SG2_ID
+  
