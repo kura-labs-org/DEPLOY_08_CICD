@@ -1,0 +1,142 @@
+- name: Make a Network
+  hosts: localhost
+  gather_facts: false
+  vars:
+    region: us-east-1
+    access_key:
+    secret_key:
+    vpcBlock: 192.168.0.0/16
+    cidr1: 192.168.0.0/18 #public
+    cidr2: 192.168.64.0/18 #private
+    cidr3: 192.168.128.0/18 #public
+    cidr4: 192.168.192.0/18 #private
+    tenancy: default #set to dedicated if you are working with PHI. It sets all Ec2 in said VPC to work on same phyiscal machine
+    key: usedFor
+    value: testing
+    zone1: us-east-1a
+    zone2: us-east-1b
+  tasks:
+  - name: create a VPC with dedicated tenancy and a couple of tags
+    amazon.aws.ec2_vpc_net:
+      access_key: '{{access_key}}'
+      secret_key: '{{secret_key}}'
+      name: VPC1
+      cidr_block: '{{vpcBlock}}'
+      region: '{{region}}'
+      tags:
+        '{{key}}': '{{value}}'
+      tenancy: '{{tenancy}}'
+  - name: Grab VPC_ With specific tags
+    command: aws ec2 describe-vpcs --filter Name=tag:Name,Values=VPC1 --query Vpcs[].VpcId --output text
+    register: vpc
+  - name: Make vpc into a variable
+    set_fact:
+      vpcid:  '{{vpc.stdout}}'
+  - debug: var=vpcid
+
+  - name: subnet 1 maker
+    amazon.aws.ec2_vpc_subnet:
+      state: present
+      vpc_id: '{{vpcid}}'
+      cidr: '{{cidr1}}'
+      az: '{{zone1}}'
+      map_public: yes
+      tags:
+        usedFor: subnet1
+    register: subnet1
+
+  - name: subnet 2 maker
+    amazon.aws.ec2_vpc_subnet:
+      state: present
+      vpc_id: '{{vpcid}}'
+      cidr: '{{cidr2}}'
+      az: '{{zone1}}'
+      map_public: no
+      tags:
+        usedFor: subnet2
+    register: subnet2
+
+  - name: subnet 3 maker
+    amazon.aws.ec2_vpc_subnet:
+      state: present
+      vpc_id: '{{vpcid}}'
+      cidr: '{{cidr3}}'
+      az: '{{zone2}}'
+      map_public: yes
+      tags:
+        usedFor: subnet3
+    register: subnet3
+
+  - name: subnet 4 maker
+    amazon.aws.ec2_vpc_subnet:
+      state: present
+      vpc_id: '{{vpcid}}'
+      cidr: '{{cidr4}}'
+      az: '{{zone2}}'
+      map_public: no
+      tags:
+        usedFor: subnet4
+    register: subnet4
+  
+  - name: grab subnet id 1
+    command: aws ec2 describe-subnets --filter Name=tag:usedFor,Values=subnet1 --query Subnets[].SubnetId --output text
+    register: subnetid1
+  # - debug: var=subnetid1
+  - name: grab subnet id 2
+    command: aws ec2 describe-subnets --filter Name=tag:usedFor,Values=subnet2 --query Subnets[].SubnetId --output text
+    register: subnetid2
+  # - debug: var=subnetid2
+  - name: grab subnet id 3
+    command: aws ec2 describe-subnets --filter Name=tag:usedFor,Values=subnet3 --query Subnets[].SubnetId --output text
+    register: subnetid3
+  # - debug: var=subnetid3
+  - name: grab subnet id 4
+    command: aws ec2 describe-subnets --filter Name=tag:usedFor,Values=subnet4 --query Subnets[].SubnetId --output text
+    register: subnetid4
+  # - debug: var=subnetid4
+
+  - name: Set variables for for subnet ID
+    set_fact:
+      subnetid_1: '{{subnetid1.stdout}}'
+      subnetid_2: '{{subnetid2.stdout}}'
+      subnetid_3: '{{subnetid3.stdout}}'
+      subnetid_4: '{{subnetid4.stdout}}'
+
+  - name: Making a gateway
+    community.aws.ec2_vpc_igw:
+      vpc_id: '{{vpcid}}'
+      state: present
+    register: igw
+
+  - name: public route maker
+    ec2_vpc_route_table:
+      vpc_id: '{{vpcid}}'
+      tags:
+        usedFor: publicRoute
+      subnets:
+        - '{{subnetid_1}}'
+        - '{{subnetid_3}}'
+      routes:
+        - dest: 0.0.0.0/0
+          gateway_id: '{{igw.gateway_id}}'
+
+  - name: private route maker
+    ec2_vpc_route_table:
+      vpc_id: '{{vpcid}}'
+      tags:
+        usedFor: privateRoute
+      subnets:
+        - '{{subnetid_2}}'
+        - '{{subnetid_4}}'
+  - name: Saving variables to file
+    lineinfile:
+      path: ./network_id.yaml
+      line: "{{ item }}"
+      create: yes
+    with_items:
+      -  "{{ 'vpcid:' + ' ' + vpcid }}"
+      -  "{{ 'subnetid_1:' + ' ' + subnetid_1 }}"
+      -  "{{ 'subnetid_2:' + ' ' + subnetid_2 }}"
+      -  "{{ 'subnetid_3:' + ' ' + subnetid_3 }}"
+      -  "{{ 'subnetid_4:' + ' ' + subnetid_4 }}"
+      -  "{{ 'ig_ID:' + ' ' + igw.gateway_id }}"
