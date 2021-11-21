@@ -1,0 +1,42 @@
+- name: Make Security Groups
+  hosts: localhost
+  gather_facts: false
+  vars:
+    region: us-east-1
+    tenancy: default #set to dedicated if you are working with PHI. It sets all Ec2 in said VPC to work on same phyiscal machine
+    key: usedFor
+    value: testing
+  vars_files:
+    - 'network_id.yaml'
+  tasks:
+  - name: Get my public IP
+    community.general.ipify_facts:
+    register: ipify_public_ip
+  - name: register IP as variable
+    set_fact:
+      publicIP: '{{ipify_public_ip.ansible_facts.ipify_public_ip}}'
+  - debug: var=publicIP
+  - name: Jenkins SG GROUP
+    amazon.aws.ec2_group:
+      name: Jenkins
+      description: an example EC2 group
+      vpc_id: '{{vpcid}}' 
+      region: '{{region}}'
+      rules:
+        - proto: tcp
+          from_port: 8080
+          to_port: 8080
+          cidr_ip: "{{ publicIP + '/32' }}"
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "{{ publicIP + '/32' }}"
+  - name: Grab SG1 ID
+    amazon.aws.ec2_group_info:
+      filters:
+        group-name: Jenkins
+    register: sg1
+  - name: Assigns sg1_ID as variable
+    set_fact: 
+      SG1_ID: '{{sg1.security_groups[0].group_id}}'
+  - debug: var=SG1_ID
