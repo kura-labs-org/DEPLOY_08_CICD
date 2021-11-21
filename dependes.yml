@@ -1,0 +1,28 @@
+---
+- name: "Setting up local machine"
+  hosts: localhost
+  connection: local
+  vars:
+    ssh_key_filename: deploy08
+    ec2_key: saikey.pem
+    controller_ip: publicIp
+    agent_ip: publicIp
+    production_ip: publicIp
+
+  tasks:
+    - name: generate SSH key "{{ssh_key_filename}}"
+      openssh_keypair:
+        path: "~/.ssh/{{ssh_key_filename}}"
+        type: rsa
+        size: 4096
+        state: present
+        force: no
+    - name: moving public key onto all ec2s
+      command: "{{item}} chdir=~/.ssh"
+      with_items:
+        - scp -i {{ec2_key}} {{ssh_key_filename}}.pub ubuntu@{{controller_ip}}:/home/ubuntu/.ssh
+        - scp -i {{ec2_key}} {{ssh_key_filename}}.pub ubuntu@{{agent_ip}}:/home/ubuntu/.ssh
+        - scp -i {{ec2_key}} {{ssh_key_filename}}.pub ubuntu@{{production_ip}}:/home/ubuntu/.ssh
+
+        
+
