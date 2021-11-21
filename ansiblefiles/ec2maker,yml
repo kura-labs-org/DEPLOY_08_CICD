@@ -1,0 +1,34 @@
+- name: EC2 Playbook
+  hosts: localhost
+  gather_facts: false
+  vars:
+    region: us-east-1
+    instance_ids: *place values of ids here
+    access_key: *place access_key here
+    secret_key: *place secret_key here
+    key_name: "change to a the name of SSH key you will use"
+    subnet_id: *ID of the subnet you want to place this EC2.
+    SG_1: *ID of the SG group you want to assign. Default will set all incoming.
+    image_id: ami-083654bd07b5da81d #set to ubuntu 20 as of 11/11/2021
+    key: usedFor
+    instance_type: t2.micro
+    count: *optional use, add manually. This will launch multiple of the same if you need.
+    keypair: "VPC-kura-useast1"
+  tasks:
+    - name: Creating EC2
+      community.aws.ec2_instance:
+        name: "name to assign the EC2"
+        key_name: '{{key_name}}'
+        vpc_subnet_id: '{{subnet_id}}'
+        instance_type: '{{instance_type}}'
+        security_group: '{{SG_1}}'
+        network:
+          assign_public_ip: true
+        image_id: '{{key_name}}'
+        tags:
+          '{{key}}': Jenkins
+        region: '{{region}}'
+        aws_access_key: '{{access_key}}'
+        aws_secret_key: '{{secret_key}}'
+        key_name: '{{keypair}}'
+    - name: Grab the Security Groip ID from here.

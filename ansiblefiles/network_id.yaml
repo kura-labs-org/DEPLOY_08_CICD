@@ -1,0 +1,7 @@
+vpcid: vpc-0cf85992791eae3ff
+subnetid_1: subnet-00c132b8705b3e0d2
+subnetid_2: subnet-075c85104ad6d52e3
+subnetid_3: subnet-0d8d23af2a2616bfa
+subnetid_4: subnet-0d97fe7411654612a
+ig_ID: igw-0620228754f950199
+vpcBlock: 192.168.0.0/16
