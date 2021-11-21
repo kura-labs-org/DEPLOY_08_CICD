@@ -140,3 +140,4 @@
       -  "{{ 'subnetid_3:' + ' ' + subnetid_3 }}"
       -  "{{ 'subnetid_4:' + ' ' + subnetid_4 }}"
       -  "{{ 'ig_ID:' + ' ' + igw.gateway_id }}"
+      -  "{{ 'vpcBlock:' + ' ' + vpcBlock}}"
