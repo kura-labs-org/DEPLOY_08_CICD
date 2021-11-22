@@ -1,0 +1,26 @@
+---
+- name: Start EC2 Instances
+  hosts: ubuntu
+  vars:	
+    controller_ip = 54.211.32.132
+  tasks:
+
+  - name: update ec2
+    shell: sudo apt update && sudo apt upgrade -y
+
+  - name: search for openjdk
+    shell: sudo apt search openjdk
+
+  - name: download openjdk11
+    shell: sudo apt install openjdk-11-jdk -y
+
+  - name: curl for jenkins
+    shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \ /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+  - name: echo variable
+    shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://pkg.jenkins.io/debian-stable binary/ | sudo tee \ /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+  - name: Install a list of packages
+    apt:
+      pkg:
+      - jenkin
