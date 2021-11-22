@@ -14,12 +14,15 @@
     instance_type: t2.micro
     count: *optional use, add manually. This will launch multiple of the same if you need.
     keypair: "VPC-kura-useast1"
+  vars_files:
+    - 'defaultvariables.yaml'
+    - 'network_id.yaml'
   tasks:
     - name: Creating EC2
       community.aws.ec2_instance:
         name: "name to assign the EC2"
-        key_name: '{{key_name}}'
-        vpc_subnet_id: '{{subnet_id}}'
+        key_name: 'jenkins'
+        vpc_subnet_id: '{{subnetid_1}}'
         instance_type: '{{instance_type}}'
         security_group: '{{SG_1}}'
         network:

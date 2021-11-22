@@ -19,7 +19,7 @@
   - name: Jenkins SG GROUP
     amazon.aws.ec2_group:
       name: Jenkins
-      description: an example EC2 group
+      description: Allows User access to SSH and WebGUI
       vpc_id: '{{vpcid}}' 
       region: '{{region}}'
       rules:
@@ -43,7 +43,7 @@
   - name: JenkinsAgent SG GROUP
     amazon.aws.ec2_group:
       name: JenkinsAgent
-      description: an example EC2 group
+      description: Jenkins SSH Access for Jenkins Main
       vpc_id: '{{vpcid}}' 
       region: '{{region}}'
       rules:
@@ -64,4 +64,36 @@
     set_fact: 
       SG2_ID: '{{sg2.security_groups[0].group_id}}'
   - debug: var=SG2_ID
-  
+  - name: Make Docker SG Group
+    amazon.aws.ec2_group:
+      name: Docker
+      description: For Docker Access via SSH
+      vpc_id: '{{vpcid}}' 
+      region: '{{region}}'
+      rules:
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "{{vpcBlock}}"
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "{{ publicIP + '/32' }}"
+  - name: Grab SG1 ID
+    amazon.aws.ec2_group_info:
+      filters:
+        group-name: Docker
+    register: sg3
+  - name: Assigns sg3_ID as variable
+    set_fact: 
+      SG2_ID: '{{sg3.security_groups[0].group_id}}'
+  - debug: var=SG3_ID
+  - name: Saving variables to file
+    lineinfile:
+      path: ./SG_id.yaml
+      line: "{{ item }}"
+      create: yes
+    with_items:
+      -  "{{ 'sgid_1:' + ' ' + SG1_ID }}"
+      -  "{{ 'sgid_2:' + ' ' + SG2_ID }}"
+      -  "{{ 'sgid_3:' + ' ' + SG3_ID }}"
