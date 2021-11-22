@@ -1,5 +1,5 @@
 ---
-- name: Start EC2 Instances
+- name: Get into Ec2 and do some updates
   hosts: ubuntu
   vars:	
     controller_ip = 54.211.32.132
