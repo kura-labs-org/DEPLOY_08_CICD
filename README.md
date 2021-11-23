@@ -22,3 +22,7 @@ Welcome to deployment 8, it's time to put all the pieces together!! Time to crea
 
 👉Link to deployment instructions: [here](https://github.com/kura-labs-org/DEPLOY_08_CICD/blob/main/Deployment%208.pdf)  
 ![image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0vQbTWDSkdWZYD_g_QVr4x8IbVCdmi-Yv3w&usqp=CAU)
+
+
+<h1> Documentation </h1>
+THe purpose of this dpeloyment is for individual leaners to create a full working pipeline to deploy an application, test the application, package the product and upload to dockerhub. Parts of the requirements that we must meet is to utilize Docker, Ansible and Cypress. For my deployment, I wil use Ansible to create the infrastructure, I will use Cypress to test the React Front End Application, and Docker to build an image and upload to the dockerhub repository.
