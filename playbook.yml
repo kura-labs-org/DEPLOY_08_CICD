@@ -10,9 +10,9 @@
   - name: download openjdk11
     shell: sudo apt install openjdk-11-jdk -y
   - name: curl for jenkins
-    shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo te>  
+    shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \ /usr/share/keyrings/jenkins-keyring.asc > /dev/null  
   - name: echo variable
-    shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://p>  
+    shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://pkg.jenkins.io/debian-stable binary/ | sudo tee \ /etc/apt/sources.list.d/jenkins.list > /dev/null  
   - name: update jenkins pkg
     shell: sudo apt-get update
   - name: Install a list of packages
