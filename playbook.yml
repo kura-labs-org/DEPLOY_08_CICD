@@ -1,8 +1,6 @@
----
-- name: Get into Ec2 and do some updates
+- name: Ec2One
   hosts: ubuntu
-  vars:	
-    controller_ip = 54.211.32.132
+  become: yes
   tasks:
 
   - name: update ec2
@@ -19,8 +17,18 @@
 
   - name: echo variable
     shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://pkg.jenkins.io/debian-stable binary/ | sudo tee \ /etc/apt/sources.list.d/jenkins.list > /dev/null
+  
+  - name: update
+    shell: sudo apt update
 
   - name: Install a list of packages
-    apt:
-      pkg:
-      - jenkin
+    shell: sudo apt-get install jenkins
+      
+---
+- name: Ec2Two
+  hosts: ubuntu
+  become: yes
+  tasks:
+  - name: update ec2
+    shell: sudo apt update && sudo apt upgrade -y
+  - name: 
