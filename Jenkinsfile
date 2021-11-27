@@ -21,7 +21,7 @@ pipeline {
     
         stage('Test') { 
           agent {
-            label 'agent-linux2'
+            label 'AgentEc2Two'
           }
           steps { 
             pass
