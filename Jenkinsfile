@@ -9,15 +9,23 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                sh 'docker build -t syip11/javadem .'
+                sh '''
+                npm install
+                npm run build
+                sudo npm install -g serve
+                serve -s build &
+                '''
                 sh 'echo "completed build"'
             }
         }
     
-        stage('Login') { 
-            steps { 
-              pass
-            }
+        stage('Test') { 
+          agent {
+            label 'agent-linux2'
+          }
+          steps { 
+            pass
+          }
         }
         
         stage('Push'){
