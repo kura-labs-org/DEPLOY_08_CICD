@@ -44,4 +44,4 @@
   - name: update docker package
     shell: sudo apt-get update  
   - name: install docker engine
-    shell: sudo apt-get install docker-ce docker-ce-cli containerd.io
+    shell: sudo apt-get install docker-ce docker-ce-cli containerd.io -y
