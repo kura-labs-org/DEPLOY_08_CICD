@@ -14,6 +14,15 @@ pipeline {
                 sh 'echo "completed build"'
             }
         }
-        
+        stage('Test'){
+            steps{
+                sh '''
+                echo "completed build"
+                '''
+            }
+        stage('Deployment'){
+            
+        }
+        }
     }
 }
