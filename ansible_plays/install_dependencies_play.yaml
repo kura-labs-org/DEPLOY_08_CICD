@@ -1,0 +1,19 @@
+---
+- name: Install git and javascript on Agent
+  # become sudo
+  become: true
+  hosts: Agents
+  gather_facts: false
+  tasks:
+  - name: Install Git 
+    apt:
+      name: git
+  
+  # Python by default is installed on Ubuntu AMIs 
+
+  - name: Install nodejs and npm
+    apt:
+      pkg:
+      - nodejs
+      - npm
+
