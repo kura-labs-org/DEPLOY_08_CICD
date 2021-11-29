@@ -8,4 +8,7 @@ sudo apt install openjdk-11-jdk -y
 sudo apt install jenkins -y
 sudo systemctl daemon-reload
 sudo systemctl start jenkins
+echo "This script has updated the packages and installed Jenkins and all the requirements. Below this message is the password needed to log into the jenkins web gui"
+
+
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
