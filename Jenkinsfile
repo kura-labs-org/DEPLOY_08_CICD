@@ -20,6 +20,7 @@ pipeline {
                 echo "completed build"
                 '''
             }
+        }
         stage('Deployment'){
             steps{
                 sh '''
