@@ -20,18 +20,45 @@
   tasks:
     - name: Creating EC2
       community.aws.ec2_instance:
-        name: "name to assign the EC2"
-        key_name: 'jenkins'
+        name: jenkins
         vpc_subnet_id: '{{subnetid_1}}'
         instance_type: '{{instance_type}}'
-        security_group: '{{SG_1}}'
+        security_group: '{{SG1_ID}}'
         network:
           assign_public_ip: true
-        image_id: '{{key_name}}'
+        image_id: '{{image_id}}'
         tags:
           '{{key}}': Jenkins
         region: '{{region}}'
-        aws_access_key: '{{access_key}}'
-        aws_secret_key: '{{secret_key}}'
         key_name: '{{keypair}}'
-    - name: Grab the Security Groip ID from here.
+    - name: Creating EC2
+      community.aws.ec2_instance:
+        name: jenkins agent
+        vpc_subnet_id: '{{subnetid_1}}'
+        instance_type: '{{instance_type}}'
+        security_group: '{{SG2_ID}}'
+        network:
+          assign_public_ip: true
+        image_id: '{{image_id}}'
+        tags:
+          '{{key}}': JenkinsAgent
+        region: '{{region}}'
+        key_name: '{{keypair}}'
+    - name: Creating EC2
+      community.aws.ec2_instance:
+        name: docker
+        vpc_subnet_id: '{{subnetid_1}}'
+        instance_type: '{{instance_type}}'
+        security_group: '{{SG3_ID}}'
+        network:
+          assign_public_ip: true
+        image_id: '{{image_id}}'
+        tags:
+          '{{key}}': Docker
+        region: '{{region}}'
+        key_name: '{{keypair}}'
+We now need a task that will grab the data and then transfer it to a file for us to utilize SSH over to install
+  - name: Gather the EC2 Instance IDs
+    community.aws.ec2_instance_info:
+      "tag:Name": Example
+    register: 
