@@ -13,3 +13,5 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 sudo groupadd docker
 
 sudo usermod -aG docker $USER
+
+echo "This script has updated and upgraded the packages. It has Installed Docker and also, it has set docker to allow use without sudo"
