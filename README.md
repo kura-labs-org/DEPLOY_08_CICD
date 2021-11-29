@@ -60,3 +60,4 @@
     git reset --hard HEAD~2
     ```
 3. There's currently a webpack error (used by React) and the latest Node version (17.0) so had to downgrade my Node image to  16.3.0
+4. There's an error with the python application where it can't use _mysql so I can't connect to AWS rds
