@@ -29,7 +29,7 @@ pipeline {
             steps{
                 sh '''
                 sudo docker pull public.ecr.aws/j2k9r8d3/deploy8pub:latest
-                docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest deploy08:latest
+                sudo docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest deploy08:latest
                 echo "completed Pre-Deploy Step"
                 '''
             }
@@ -40,6 +40,7 @@ pipeline {
             }
             steps{
                 sh 'echo "Deploy step"'
+                
             }
         }
         }
