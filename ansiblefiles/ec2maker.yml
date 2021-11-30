@@ -10,8 +10,8 @@
     keypair: "VPC-kura-useast1"
   vars_files:
     - 'defaultvariables.yaml'
-    - 'network_id.yaml'
-    -  'SG_id.yaml'
+    - './variables/network_id.yaml'
+    -  './variables/SG_id.yaml'
   tasks:
   - name: Creating EC2 jenkins Main
     community.aws.ec2_instance:
@@ -72,7 +72,7 @@
   # - debug: var=dockerID
   - name: Save IDs to a new file
     lineinfile:
-      path: ./ec2_id.yaml
+      path: ./variables/ec2_id.yaml
       line: "{{ item }}"
       create: yes
     with_items:

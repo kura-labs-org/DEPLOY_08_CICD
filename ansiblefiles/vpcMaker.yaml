@@ -130,7 +130,7 @@
         - '{{subnetid_4}}'
   - name: Saving variables to file
     lineinfile:
-      path: ./network_id.yaml
+      path: ./variables/network_id.yaml
       line: "{{ item }}"
       create: yes
     with_items:

@@ -7,7 +7,7 @@
     key: usedFor
     value: testing
   vars_files:
-    - 'network_id.yaml'
+    - './variables/network_id.yaml'
   tasks:
   - name: Get my public IP
     community.general.ipify_facts:
@@ -83,7 +83,7 @@
       SG3_ID: '{{sg3.security_groups[0].group_id}}'
   - name: Saving variables to file
     lineinfile:
-      path: ./SG_id.yaml
+      path: ./variables/SG_id.yaml
       line: "{{ item }}"
       create: yes
     with_items:
