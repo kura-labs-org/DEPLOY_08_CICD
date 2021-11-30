@@ -22,6 +22,14 @@ pipeline {
                 sh 'echo "completed test"'
             }
         }
+        stage('Pre-Deploy'){
+            steps{
+                sh '''
+                echo "starting Pre-Deploy"
+                '''
+                sh 'echo "completed Pre-Deploy"'
+            }
+        }
         stage('Deployment'){
             steps{
                 sh '''
