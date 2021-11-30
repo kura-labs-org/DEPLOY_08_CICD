@@ -3,14 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
-
+#https://pythonbasics.org/flask-sqlalchemy/
+#https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
 app = Flask(__name__)
 CORS(app)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\TyronePS\\Desktop\\test.db'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://DBusername:DBpassword@DBEndpoint:3306/DatabaseName'
 app.config['SQLALCHEMY_DATABASE_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
@@ -27,11 +25,10 @@ class Articles(db.Model):
 class ArticleSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'body', 'date')
-
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
-
-
+#use the below command to create the table and then comment it out once created
+#db.create_all()
 @app.route('/get', methods = ['GET'])
 def get_articles():
     all_articles = Articles.query.all()
@@ -42,9 +39,6 @@ def get_articles():
 def post_articles(id):
     article = Articles.query.get(id)
     return article_schema.jsonify(article)
-
-
-
 
 @app.route('/add', methods = ['POST'])
 def add_article():
@@ -78,3 +72,4 @@ def delete_article(id):
 
 if __name__ == "__main__":
     app.run()
+
