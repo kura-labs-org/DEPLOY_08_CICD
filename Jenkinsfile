@@ -40,7 +40,7 @@ pipeline {
             }
             steps{
                 sh 'echo "Deploy step"'
-                sh 'sudo docker push deploy08:latest'
+                sh 'sudo docker push public.ecr.aws/j2k9r8d3/deploy8pub:latest'
             }
         }
         }
