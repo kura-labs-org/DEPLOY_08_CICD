@@ -36,10 +36,6 @@
       filters:
         group-name: Jenkins
     register: sg1
-  - name: Assigns sg1_ID as variable
-    set_fact: 
-      SG1_ID: '{{sg1.security_groups[0].group_id}}'
-  - debug: var=SG1_ID
   - name: JenkinsAgent SG GROUP
     amazon.aws.ec2_group:
       name: JenkinsAgent
@@ -55,15 +51,11 @@
           from_port: 22
           to_port: 22
           cidr_ip: "{{ publicIP + '/32' }}"
-  - name: Grab SG1 ID
+  - name: Grab SG2 ID
     amazon.aws.ec2_group_info:
       filters:
         group-name: JenkinsAgent
     register: sg2
-  - name: Assigns sg2_ID as variable
-    set_fact: 
-      SG2_ID: '{{sg2.security_groups[0].group_id}}'
-  - debug: var=SG2_ID
   - name: Make Docker SG Group
     amazon.aws.ec2_group:
       name: Docker
@@ -79,15 +71,16 @@
           from_port: 22
           to_port: 22
           cidr_ip: "{{ publicIP + '/32' }}"
-  - name: Grab SG1 ID
+  - name: Grab SG3 ID
     amazon.aws.ec2_group_info:
       filters:
         group-name: Docker
     register: sg3
-  - name: Assigns sg3_ID as variable
+  - name: Assigns sgX_ID as variable
     set_fact: 
-      SG2_ID: '{{sg3.security_groups[0].group_id}}'
-  - debug: var=SG3_ID
+      SG1_ID: '{{sg1.security_groups[0].group_id}}'
+      SG2_ID: '{{sg2.security_groups[0].group_id}}'
+      SG3_ID: '{{sg3.security_groups[0].group_id}}'
   - name: Saving variables to file
     lineinfile:
       path: ./SG_id.yaml
