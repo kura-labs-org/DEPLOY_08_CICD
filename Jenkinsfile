@@ -28,7 +28,9 @@ pipeline {
           }       
             steps{
                 sh '''
-               
+                docker pull 649474668035.dkr.ecr.us-east-1.amazonaws.com/deploy08
+                docker image tag 649474668035.dkr.ecr.us-east-1.amazonaws.com/deploy08:latest deploy08:latest
+              
                 echo "completed Deploy Step"
                 '''
             }
