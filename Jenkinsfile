@@ -17,8 +17,9 @@ pipeline {
         stage('Test'){
             steps{
                 sh '''
-                echo "completed build"
+                npm test
                 '''
+                sh 'echo "completed test"'
             }
         }
         stage('Deployment'){
