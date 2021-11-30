@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Deployment'){
           agent {
-            label 'agent-linux2'
+            label 'DockerEc2'
           }       
             steps{
                 sh '''
