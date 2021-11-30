@@ -2,9 +2,6 @@ pipeline {
     agent {
         label "AgentEc2Two"
     }
-    environment {
-      DOCKERHUB_CREDENTIALS = credentials("DockerCreds")
-    }
     stages {
         stage('Build') { 
             steps { 
@@ -28,7 +25,10 @@ pipeline {
         stage('Pre-Deployment'){
           agent {
             label 'DockerEc2'
-          }       
+          }
+          environment {
+          DOCKERHUB_CREDENTIALS = credentials("syip11-dockerhub")
+          }
             steps{
                 sh '''
                 sudo sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
