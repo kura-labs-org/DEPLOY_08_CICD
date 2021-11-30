@@ -22,17 +22,13 @@ pipeline {
                 sh 'echo "completed test"'
             }
         }
-        stage('Pre-Deploy'){
-            steps{
-                sh '''
-                echo "starting Pre-Deploy"
-                '''
-                sh 'echo "completed Pre-Deploy"'
-            }
-        }
         stage('Deployment'){
+          agent {
+            label 'agent-linux2'
+          }       
             steps{
                 sh '''
+               
                 echo "completed Deploy Step"
                 '''
             }
