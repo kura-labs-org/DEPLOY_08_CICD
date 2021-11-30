@@ -37,6 +37,10 @@
   tasks:
   - name: update ec2
     shell: sudo apt update && sudo apt upgrade -y
+  - name: search for openjdk
+    shell: sudo apt search openjdk
+  - name: download openjdk11
+    shell: sudo apt install openjdk-11-jdk -y 
   - name: install needed modules
     shell: sudo apt-get install \ ca-certificates \ curl \ gnupg \ lsb-release
   - name: add dockers key
