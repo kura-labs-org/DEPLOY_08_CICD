@@ -28,8 +28,8 @@ pipeline {
           }       
             steps{
                 sh '''
-                docker pull 649474668035.dkr.ecr.us-east-1.amazonaws.com/deploy08
-                docker image tag 649474668035.dkr.ecr.us-east-1.amazonaws.com/deploy08:latest deploy08:latest
+                docker pull public.ecr.aws/j2k9r8d3/deploy8pub:latest
+                docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest:latest deploy08:latest
                 echo "completed Pre-Deploy Step"
                 '''
             }
