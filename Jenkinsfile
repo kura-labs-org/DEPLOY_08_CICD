@@ -40,7 +40,7 @@ pipeline {
             }
             steps{
                 sh 'echo "Deploy step"'
-                sh 'sudo docker push sai_deploy08:latest'
+                sh 'sudo docker push deploy08:latest'
             }
         }
         }
