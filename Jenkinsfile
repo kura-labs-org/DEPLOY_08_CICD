@@ -31,7 +31,7 @@ pipeline {
           }       
             steps{
                 sh '''
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sudo sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sudo docker pull public.ecr.aws/j2k9r8d3/deploy8pub:latest
                 sudo docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest deploy08:latest
                 echo "completed Pre-Deploy Step"
