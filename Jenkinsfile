@@ -2,9 +2,6 @@ pipeline {
     agent {
         label "AgentEc2Two"
     }
-    environment {
-    DOCKERHUB_CREDENTIALS = credentials("syip11-dockerhub")
-    }
     stages {
         stage('Build') { 
             steps { 
@@ -28,6 +25,9 @@ pipeline {
         stage('Pre-Deployment'){
           agent {
             label 'DockerEc2'
+          }
+          environment {
+          DOCKERHUB_CREDENTIALS = credentials("syip11-docker")
           }
             steps{
                 sh '''
