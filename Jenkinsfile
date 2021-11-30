@@ -27,7 +27,7 @@ pipeline {
             label 'DockerEc2'
           }
           environment {
-          DOCKERHUB_CREDENTIALS = credentials("JenkinSyip")
+          DOCKERHUB_CREDENTIALS = credentials("syip11-dockerhub")
           }
             steps{
                 sh '''
