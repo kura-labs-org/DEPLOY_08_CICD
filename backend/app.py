@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from os import environ
+from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_marshmallow import Marshmallow
@@ -32,6 +33,7 @@ class ArticleSchema(ma.Schema):
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
 
+db.create_all()
 
 @app.route('/get', methods = ['GET'])
 def get_articles():
@@ -78,4 +80,4 @@ def delete_article(id):
     return article_schema.jsonify(article)
 
 if __name__ == "__main__":
-    app.run
+    app.run()
