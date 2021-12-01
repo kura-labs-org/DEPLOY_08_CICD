@@ -2,9 +2,6 @@ pipeline {
     agent {
         label "AgentEc2Two"
     }
-    environment {
-    DOCKERHUB_CREDENTIALS = credentials("syip11-dockerhub")
-    }   
     stages {
         stage('Build') { 
             steps { 
@@ -25,13 +22,26 @@ pipeline {
                 sh 'echo "completed test"'
             }
         }
+        stage('login'){
+            agent{
+                label 'DockerEc2'
+            }
+            environment {
+            DOCKERHUB_CREDENTIALS = credentials("syip11-dockerhub")
+            }
+            steps{
+                echo "login Step"
+                sudo sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' 
+            }
+    }   
+            
+        }
         stage('Pre-Deployment'){
           agent {
             label 'DockerEc2'
           }
             steps{
                 sh '''
-                sudo sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sudo docker pull public.ecr.aws/j2k9r8d3/deploy8pub:latest
                 sudo docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest deploy08:latest
                 echo "completed Pre-Deploy Step"
