@@ -47,7 +47,7 @@ pipeline {
                 echo '$DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "login completed"
                 sh 'echo "Deploy step"'
-                sh 'sudo docker push syip11/deploy08:latest'
+                sh 'docker push syip11/deploy08:latest'
             }
         }
         }
