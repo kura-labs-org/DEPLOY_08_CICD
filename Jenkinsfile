@@ -30,7 +30,7 @@ pipeline {
             steps{
                 sh '''
                 sudo docker pull public.ecr.aws/j2k9r8d3/deploy8pub:latest
-                sudo docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest deploy08:latest
+                sudo docker image tag public.ecr.aws/j2k9r8d3/deploy8pub:latest syip11/deploy08:latest
                 echo "completed Pre-Deploy Step"
                 '''
             }
@@ -47,7 +47,7 @@ pipeline {
                 echo '$DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "login completed"
                 sh 'echo "Deploy step"'
-                sh 'sudo docker push deploy08:latest'
+                sh 'sudo docker push syip11/deploy08:latest'
             }
         }
         }
