@@ -33,8 +33,6 @@ class ArticleSchema(ma.Schema):
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
 
-db.create_all()
-
 @app.route('/get', methods = ['GET'])
 def get_articles():
     all_articles = Articles.query.all()
