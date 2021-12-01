@@ -44,7 +44,7 @@ pipeline {
             }
             steps{
                 echo "logging in"
-                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                echo '$DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "login completed"
                 sh 'echo "Deploy step"'
                 sh 'sudo docker push public.ecr.aws/j2k9r8d3/deploy8pub:latest'
