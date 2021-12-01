@@ -47,7 +47,7 @@ pipeline {
                 echo '$DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "login completed"
                 sh 'echo "Deploy step"'
-                sh 'sudo docker push public.ecr.aws/j2k9r8d3/deploy8pub:latest'
+                sh 'sudo docker push deploy08:latest'
             }
         }
         }
