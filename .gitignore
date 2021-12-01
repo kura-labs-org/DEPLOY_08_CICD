@@ -3,3 +3,4 @@ node_modules/
 /ansible_plays/aws_inventory
 venv/
 .env
+__pycache__
