@@ -1,4 +1,8 @@
-FROM python:3.8-slim-buster
+FROM ubuntu:20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && apt install -y python3 pip mysql-server default-libmysqlclient-dev
 
 WORKDIR /app
 
