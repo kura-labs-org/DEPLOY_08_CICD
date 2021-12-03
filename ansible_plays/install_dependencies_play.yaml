@@ -1,5 +1,5 @@
 ---
-- name: Install git and javascript on Agent
+- name: Install git, javascript, and java on Agents
   # become sudo
   become: true
   hosts: Agents
@@ -17,3 +17,17 @@
       - nodejs
       - npm
 
+  - name: Install java
+    apt:
+      pkg:
+      - openjdk-11-jdk
+
+---
+- name: Install stress on production EC2
+  become: true 
+  hosts: Production 
+  gather_facts: false
+  tasks:
+  - name: Install stress 
+    apt:
+      name: stress-ng
