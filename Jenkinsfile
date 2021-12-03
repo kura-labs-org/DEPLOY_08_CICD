@@ -1,6 +1,6 @@
 pipeline {
   agent {
-      label 'agent1'
+      label 'Jenkins1'
   }
   stages {
     stage ('Build') {
@@ -15,7 +15,7 @@ pipeline {
     }
     stage ('Second') {
       agent {
-        label 'agent1'
+        label 'Jenkins1'
       }
       steps {
       sh ''' 
