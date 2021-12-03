@@ -1,6 +1,6 @@
 describe('Title', () => {
     it('Has the right title', () => {
-        cy.visit('http://127.0.0.1:3000/')
+        cy.visit('http://3.82.217.25:3000/')
 
         cy.get('title')
             .invoke('text')
