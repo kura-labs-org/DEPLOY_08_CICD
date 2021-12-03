@@ -19,6 +19,7 @@ pipeline {
                 sh '''
                 npm install cypress
                 npm install mocha
+                sudo apt-get install -y xvfb
                 npx cypress run --spec ./cypress/integration/test.spec.js
                 npm test
                 '''
