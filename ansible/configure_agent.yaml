@@ -1,0 +1,18 @@
+---
+- name: "Configuring the Agent EC2 instance"
+  hosts: Agent
+  gather_facts: false
+  connection: ssh
+
+  tasks:
+    - name: updating the ec2 instance
+      shell: sudo apt-get update && sudo apt-get upgrade -y
+
+    - name: installing java
+      shell: sudo apt install openjdk-11-jre-headless -y
+
+    - name: installing nodejs
+      shell: sudo apt install nodejs -y
+
+    - name: installing npm
+      shell: sudo apt install npm -y
