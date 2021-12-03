@@ -8,7 +8,7 @@ pipeline {
       sh '''
       #! /bin/bash
       python3 -m venv test3
-      source ./bin/activate
+      source ./test3/bin/activate
       pip install pip --upgrade
       pip install pytest
       pip install requirements.txt
