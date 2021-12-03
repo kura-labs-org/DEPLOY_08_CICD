@@ -11,7 +11,7 @@ pipeline {
       . ./test3/bin/activate
       pip install pip --upgrade
       pip install pytest
-      pip install requirements.txt
+      pip install -r requirements.txt
       py.test --verbose --junit-xml test-reports/results.xml
       flask run
       '''
