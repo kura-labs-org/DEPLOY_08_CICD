@@ -80,4 +80,4 @@ def delete_article(id):
     return article_schema.jsonify(article)
 
 if __name__ == "__main__":
-    app.run()
+    db.create_all()
