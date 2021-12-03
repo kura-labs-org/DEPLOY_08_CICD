@@ -1,13 +1,16 @@
-FROM openjdk:11
-COPY ./public /home/public
-COPY ./src /home/src
-COPY package.json /home
-COPY package-lock.json /home
-WORKDIR /home
-RUN apt-get update && apt-get install -y
-RUN apt-get install nodejs npm -y
-RUN npm install
+# build environment
+FROM node:13.12.0-alpine as builder
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent
+RUN npm install react-scripts@3.4.1 -g --silent
+COPY . ./
 RUN npm run build
-RUN npm install -g serve
-EXPOSE 3000
-CMD ["serve", "-s"] 
+
+# production environment
+FROM nginx:stable-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]  
