@@ -31,13 +31,13 @@ THe purpose of this dpeloyment is for individual leaners to create a full workin
 For this part, we will be using AWS to create the deployment. What this means is that we must create an environment that is suitable to the needs of the application. A VPC with 4 subnets, 2 in private and 2 in public will be created to ensure that that we can develop in one environment, while keeping the other environment safe through security protocols.
 
 We will is Ansible to do the following:
--- Create VPC, Subnet, Internet Gateway and Routing Table
--- Create Security groups that will dictate the ingress and egress of the servers that we will be using.
--- Create EC2 on t2.micro for a Jenkins Main, Jenkins Agent, and Docker
+- Create VPC, Subnet, Internet Gateway and Routing Table
+- Create Security groups that will dictate the ingress and egress of the servers that we will be using.
+- Create EC2 on t2.micro for a Jenkins Main, Jenkins Agent, and Docker
 
 Based on the goals of [this](https://github.com/kura-labs-org/DEPLOY_08_CICD/blob/main/Deployment%208.pdf), We wil do the following.
 
---Use Jenkins on main to instruct Jenkins on agent to build a front end application with a flask backend to interact with a sqlite3 backend.
---Jenkins will also run a cypress test on the front end of the application to ensure asserted values are corrected, meaning that the application loads and elements that are found are present.
---If successful, this application will then be repackaged into a docker image through a dockerfile and pushed to dockerhub.
---Jenkins main will be generate a report, which then must be encrypted and uploaded to this current repository.
+- Use Jenkins on main to instruct Jenkins on agent to build a front end application with a flask backend to interact with a sqlite3 backend.
+- Jenkins will also run a cypress test on the front end of the application to ensure asserted values are corrected, meaning that the application loads and elements that are found are present.
+- If successful, this application will then be repackaged into a docker image through a dockerfile and pushed to dockerhub.
+- Jenkins main will be generate a report, which then must be encrypted and uploaded to this current repository.
