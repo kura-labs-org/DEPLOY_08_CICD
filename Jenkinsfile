@@ -27,9 +27,21 @@ pipeline {
       post {
         always {
           junit 'results/cypress-report.xml'
-        }
-          
+        }      
       }
     }
+    stage ('Docker Image Make') {
+      agent {
+        label 'agent2'
+      }
+      steps {
+      sh ''' 
+         docker build -t frontend1 .
+         docker tag frontend1:latest public.ecr.aws/a8o2g9z3/frontend1:latest
+         docker push public.ecr.aws/a8o2g9z3/frontend1:latest
+        '''
+      }
+    }
+
   }
 } 
