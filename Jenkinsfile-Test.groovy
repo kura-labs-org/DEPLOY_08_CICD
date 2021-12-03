@@ -6,7 +6,6 @@ pipeline {
   stages {
     stage ('Build') {
       steps {
-      sh 'rm -rf ./cypress'
       sh '''
         npm install
         npm run build
@@ -24,27 +23,32 @@ pipeline {
         npx cypress run --spec ./cypress/integration/test.spec.js
         '''
       }
+      post {
+            always {
+                    junit 'results/cypress-report.xml'
+                    }
+           }
     }
 
-    stage ('Docker Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
-    }
+//     stage ('Docker Login') {
+//       steps {
+//         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+//       }
+//     }
 
-    stage ('Dockerize') {
-      steps {
-        sh 'docker build -t dec4 .'
-      }
-    }
+//     stage ('Dockerize') {
+//       steps {
+//         sh 'docker build -t dec4 .'
+//       }
+//     }
 
-    stage ('Push') {
-      steps {
-        sh '''
-        docker push kentan404/deploy8:dec4
-        '''
-      }
-    }
+//     stage ('Push') {
+//       steps {
+//         sh '''
+//         docker push kentan404/deploy8:dec4
+//         '''
+//       }
+//     }
 
 
   }
