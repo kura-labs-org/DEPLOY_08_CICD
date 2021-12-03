@@ -26,3 +26,18 @@ Welcome to deployment 8, it's time to put all the pieces together!! Time to crea
 
 <h1> Documentation </h1>
 THe purpose of this dpeloyment is for individual leaners to create a full working pipeline to deploy an application, test the application, package the product and upload to dockerhub. Parts of the requirements that we must meet is to utilize Docker, Ansible and Cypress. For my deployment, I wil use Ansible to create the infrastructure, I will use Cypress to test the React Front End Application, and Docker to build an image and upload to the dockerhub repository.
+
+<h2>Predeployment Environment</h2>
+For this part, we will be using AWS to create the deployment. What this means is that we must create an environment that is suitable to the needs of the application. A VPC with 4 subnets, 2 in private and 2 in public will be created to ensure that that we can develop in one environment, while keeping the other environment safe through security protocols.
+
+We will is Ansible to do the following:
+-- Create VPC, Subnet, Internet Gateway and Routing Table
+-- Create Security groups that will dictate the ingress and egress of the servers that we will be using.
+-- Create EC2 on t2.micro for a Jenkins Main, Jenkins Agent, and Docker
+
+Based on the goals of [this](https://github.com/kura-labs-org/DEPLOY_08_CICD/blob/main/Deployment%208.pdf), We wil do the following.
+
+--Use Jenkins on main to instruct Jenkins on agent to build a front end application with a flask backend to interact with a sqlite3 backend.
+--Jenkins will also run a cypress test on the front end of the application to ensure asserted values are corrected, meaning that the application loads and elements that are found are present.
+--If successful, this application will then be repackaged into a docker image through a dockerfile and pushed to dockerhub.
+--Jenkins main will be generate a report, which then must be encrypted and uploaded to this current repository.
