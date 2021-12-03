@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'Test'}
+  agent { label 'test'}
   environment{
     DOCKERHUB_CREDENTIALS = credentials('kentan404-dockerhub')
     }
