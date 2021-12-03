@@ -4,6 +4,6 @@ describe('b', () => {
 
       cy.get('b')
           .invoke('text')
-          .should("equal", "My Awesome Web Application")
+          .should("equal", "Choose you player: 1. LeBron James 2. Michael Jordan 3. Kevin Durant...")
    });
 });
