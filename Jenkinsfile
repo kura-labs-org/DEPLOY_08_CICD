@@ -29,7 +29,9 @@ pipeline {
               always {
               junit 'results/cypress-report.xml'
             }
-            }
+          
+          }
+        }
             
         stage('Pre-Deployment'){
           agent {
@@ -60,3 +62,4 @@ pipeline {
         }
         }
 }
+
