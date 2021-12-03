@@ -1,5 +1,4 @@
 FROM openjdk:11
-COPY ./build /home/build
 COPY ./public /home/public
 COPY ./src /home/src
 COPY package.json /home
