@@ -1,10 +1,10 @@
 describe('Title', () => {
-    it('has the right title', () => {
+    it('Has the right title', () => {
         cy.visit('http://172.31.88.114:5000/')
 
         cy.get('title')
             .invoke('text')
-            .should("equal", "React App")
+            .should("equal", "React")
     });
 
 });
