@@ -25,7 +25,11 @@ pipeline {
                 '''
                 sh 'echo "completed test"'
             }
-        }
+            post {
+              always {
+              junit 'results/cypress-report.xml'
+            }
+            }
             
         stage('Pre-Deployment'){
           agent {
