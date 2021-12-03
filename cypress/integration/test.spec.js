@@ -4,7 +4,7 @@ describe('Title', () => {
 
         cy.get('title')
             .invoke('text')
-            .should("equal", "Hello again react")
+            .should("equal", "React App")
     });
 
 });
