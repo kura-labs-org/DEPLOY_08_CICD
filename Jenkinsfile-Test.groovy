@@ -1,8 +1,8 @@
 pipeline {
   agent { label 'test'}
-  environment{
-    DOCKERHUB_CREDENTIALS = credentials('kentan404-dockerhub')
-    }
+//   environment{
+//     DOCKERHUB_CREDENTIALS = credentials('kentan404-dockerhub')
+//     }
   stages {
     stage ('Build') {
       steps {
