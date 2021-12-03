@@ -17,6 +17,9 @@ pipeline {
         stage('Test'){
             steps{
                 sh '''
+                npm install cypress
+                npm install mocha
+                npx cypress run --spec ./cypress/integration/test.spec.js
                 npm test
                 '''
                 sh 'echo "completed test"'
