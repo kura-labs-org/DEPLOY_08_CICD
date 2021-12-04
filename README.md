@@ -163,6 +163,31 @@ Enter your pem key down below that was used to access the EC2 agent:
 ```
 
 ```
+14. On the master EC2 run the command:
+```
+sudo nano key.pem
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task1/20.png width="1000" />
+     </h1>
+</html> 
+Afterwards, a blank screen should appear where the pem file contents can now be pasted into the 'key.pem' file
+15. Now from the Master, its possible to access the agent EC2's from the terminal as shown below: 
+```
+sudo ssh -i key.pem ubuntu@""
+```
+"" : The EC2 Ipv4 private address
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task1/21.png width="1000" />
+     </h1>
+</html> 
+If there was any issues connecting to one of the agent EC2's from the terminal, run in the Master EC2:
+```
+sudo chmod 400 key.pem
+```
+Then retry connecting to an EC2 agent
 
 # Task 2
 
