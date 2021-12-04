@@ -24,7 +24,7 @@ pipeline {
         npx cypress run --spec ./cypress/integration/test.spec.js
         npm test
         '''
-        }
+        
      }
       post {
             always {
