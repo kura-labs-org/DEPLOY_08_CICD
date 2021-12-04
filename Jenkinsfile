@@ -46,7 +46,7 @@ pipeline {
       }
     }
 
-    /* stage ('Build Docker Image'){
+    stage ('Build Docker Image'){
       steps {
         dir('./frontend'){
           sh '''
@@ -67,6 +67,7 @@ pipeline {
 
 
     }
+    /*
 
     stage ("Login to Docker"){
       steps {
