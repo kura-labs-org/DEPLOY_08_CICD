@@ -5,6 +5,7 @@ pipeline {
     stage ('Build') {
       steps {
       sh '''
+        sudo apt install npm -y
         npm install
         npm run build
         sudo npm install -g serve
