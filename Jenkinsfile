@@ -26,7 +26,7 @@ pipeline {
         }
       }
     }
-    stage ('Testing Frontend w/ Cypress') {
+    /* stage ('Testing Frontend w/ Cypress') {
       steps {
         dir('./frontend'){
           sh '''
@@ -43,7 +43,7 @@ pipeline {
            }
         }
       }
-    }
+    } */
 
     stage ('Build Docker Image'){
       steps {
