@@ -31,12 +31,13 @@ sudo apt install openjdk-11-jre-headless
 ```
 java -version
 ```
+Java 11 must be installed on every EC2 for the Master EC2 to recognize agent EC2s. 
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task1/3.png width="1000" />
      </h1>
 </html> 
-Java 11 must be installed on every EC2
+
 
 ```
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
