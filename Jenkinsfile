@@ -9,7 +9,7 @@ pipeline {
   }
 
   environment {
-        DOCKERHUB_CREDENTIALS = credentials('DockerCredentials')
+        DOCKERHUB_CREDENTIALS = credentials('zcyrus')
   }
 
   stages {
