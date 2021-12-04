@@ -21,7 +21,6 @@ pipeline {
             npm install
             npm run build
             sudo npm install -g serve
-            npm run start
             serve -s build &
             '''
         
