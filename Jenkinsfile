@@ -19,14 +19,16 @@ pipeline {
         dir('./frontend'){
           sh '''
             npm install
-            # sudo npm install -g serve
-            npm run start &
+            npm run build
+            sudo npm install -g serve
+            npm run start
+            serve -s build &
             '''
         
         }
       }
     }
-    /* stage ('Testing Frontend w/ Cypress') {
+    stage ('Testing Frontend w/ Cypress') {
       steps {
         dir('./frontend'){
           sh '''
@@ -43,9 +45,9 @@ pipeline {
            }
         }
       }
-    } */
+    }
 
-    stage ('Build Docker Image'){
+    /* stage ('Build Docker Image'){
       steps {
         dir('./frontend'){
           sh '''
@@ -85,6 +87,7 @@ pipeline {
       }
 
     }
+    */
 
 
   }
