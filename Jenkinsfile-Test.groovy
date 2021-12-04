@@ -22,7 +22,8 @@ pipeline {
         sudo apt install -y xvfb
         npx cypress run --spec ./cypress/integration/test.spec.js
         '''
-      }
+        }
+     }
       post {
             always {
                     junit 'results/cypress-report.xml'
