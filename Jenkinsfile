@@ -7,6 +7,11 @@ pipeline {
   triggers {
     pollSCM('')
   }
+
+  environment {
+        DOCKERHUB_CREDENTIALS = credentials('DockerCredentials')
+  }
+
   stages {
     stage ('Build Application') {
       
@@ -40,7 +45,24 @@ pipeline {
       }
     }
 
-    /* stage ('Build Docker Image'){
+    stage ('Build Docker Image'){
+      steps {
+        dir('./frontend'){
+          sh '''
+          docker build -t zcyrus/react-front:latest .
+          '''
+
+        
+        }
+        dir('./backend'){
+          sh '''
+          docker build -t zcyrus/python-backend:latest . 
+          '''
+        }
+      
+      }
+    
+
 
     }
 
@@ -50,10 +72,11 @@ pipeline {
 
     stage ("Push to Dockerhub"){
 
+      sh 'docker push zcyrus/react-front:latest'
+      sh 'docker push zcyrus/python-backend:latest'
+
     }
 
-    stage ('Deploy') {
 
-    } */
   }
 }
