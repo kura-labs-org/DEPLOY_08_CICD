@@ -11,16 +11,18 @@ pipeline {
         npm run build
         sudo npm install -g serve
         serve -s build &
+        '''
       }
     }
 
     stage ('Test') {
       steps {
-      sh ''' 
+        sh ''' 
         npm install cypress
         npm install mocha
         sudo apt install -y xvfb
         npx cypress run --spec ./cypress/integration/test.spec.js
+        npm test
         '''
         }
      }
