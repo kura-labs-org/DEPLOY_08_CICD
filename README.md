@@ -31,12 +31,12 @@ sudo apt install openjdk-11-jre-headless
 ```
 java -version
 ```
-Java 11 must be installed on every EC2 for the Master EC2 to recognize agent EC2s. 
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task1/3.png width="1000" />
      </h1>
 </html> 
+Java 11 must be installed on every EC2 for the Master EC2 to recognize agent EC2s. <br>
 
 
 ```
@@ -198,5 +198,28 @@ Then retry connecting to an EC2 agent
 # Task 3
 
 # Task 4
+1. Place all the files to an application in one folder that is accessible from your computer
+
+2. Open up the EC2 in the terminal that has docker installed
+
+3. It is possible to connect a local host's directory to to another server, locally or virtually which includes an EC2 instance. By running the command shown below, the files in the from the specified localhost's folder will be sent to a specified EC2 directory. Before running copying files to the EC2, create a folder in the EC2 with the command:
+```
+mkdir ...
+```
+... is the words that appear after mkdir which gives the name to a created folder. To send files from the localhost to an EC2 follow the format below:
+
+```
+scp -i /path/my-key-pair.pem /path/my-file.txt ec2-user@my-instance-public-dns-name:path/
+```
+
+/path/my-key-pair.pem : Directory where pem key is located on the localhost to connect to the EC2 <br>
+/path/my-file.txt : Directory of file from a localhost directory that will be sent to the EC2
+ec2-user : Depending on the image of the ec2, whether its Amazon or Ubuntu image, then ec2-user or ubuntu needs to be put here respectively <br>
+my-instance-public-dns-name : This is the Public IPv4 DNS and can be retrieved on the EC2 page
+path/ : Folder the files will be sent to on the EC2. Once again, create a folder before running this command on the EC2 to send the files to.  
+
+
+
+
 
 # Task 5
