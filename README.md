@@ -24,12 +24,15 @@
 4. Create a file called aws_inventory (no extension). This will be the inventory file ansible uses to know what hosts to connect to. Use the following format. 
     ```
 
-    [ansible_nodes]
-
     [Agents]
-    3.95.150.116 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/east1key.pem
+    18.234.125.150 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/east1key.pem # jenkins agent
+    54.234.182.219 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/east1key.pem # production
 
-    [Jenkins]
+    [Jenkins-Main]
+    3.89.222.189 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/east1key.pem
+
+    [Production]
+    54.234.182.219 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/east1key.pem
 
     ```
 
@@ -39,8 +42,26 @@
 1. Use the install_dependencies_play.yaml playbook to install git, nodejs, and npm onto our agent.
 
     ```
-    ansible-playbook Agents install_dependencies_play.yaml -i aws_inventory
+    ansible-playbook install_dependencies_play.yaml -i aws_inventory
     ```
+
+### Configure Jenkins
+
+1. SSH to your main Jenkins instance and cat the jenksPassword.txt file to find the jenkins password needed to login.
+
+    ```
+    cat jenksPassword.txt
+    ```
+2. Login to your Jenkins website through the IP address on your AWS EC2 and configure your Jenkins setup with login and plugins. 
+
+### Adding Agent to your Jenkins 
+
+1. Once you login to Jenkins navigate to the manage Jenkins page, and click the manage nodes and clouds.
+2. Click new node on the left panel and add a new Agent through SSH. 
+3. Once successfully configured we can use this agent to run our builds. 
+
+### Creating our Jenkins Pipeline
+
 
 
 
