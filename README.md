@@ -7,7 +7,7 @@
 * 3rd EC2 - Production <br>
 
 2. **Creating the Master:**
-Create an Amazon EC2. In this demonstration, Ubuntu AMI's was used. <br>
+Create an three Amazon EC2. In this demonstration, Ubuntu AMI's was used. <br>
 <br>
 Run the following commands to install Jenkins:
 ```
@@ -72,7 +72,7 @@ sudo systemctl status jenkins
      </h1>
 </html> 
 
-3. Go to the internet browser and put the EC2 public address followed by 8080
+3. Go to the internet browser and put the Master EC2 public address followed by 8080
 
 <html>
      <h1>
@@ -139,7 +139,7 @@ After running the cat command, the line of random numbers and letters is your pa
      </h1>
 </html> 
 
-Enter your pem key down below:
+Enter your pem key down below that was used to access the EC2 agent:
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task1/13.png width="1000" />
@@ -158,8 +158,11 @@ Enter your pem key down below:
         <img style="float: center;" src=/deployment8/task1/19.png width="1000" />
      </h1>
 </html> 
-13. 
 
+13. On the 3rd EC2, install Docker:
+```
+
+```
 
 # Task 2
 
