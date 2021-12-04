@@ -1,6 +1,7 @@
 ---
 - name: Install Docker on Agent and Production System
-  hosts: AWS-Project
+  become: true
+  hosts: Agents
   gather_facts: false
 
   tasks:
