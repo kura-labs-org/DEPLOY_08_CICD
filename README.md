@@ -213,11 +213,15 @@ scp -i /path/my-key-pair.pem /path/my-file.txt ec2-user@my-instance-public-dns-n
 ```
 
 /path/my-key-pair.pem : Directory where pem key is located on the localhost to connect to the EC2 <br>
-/path/my-file.txt : Directory of file from a localhost directory that will be sent to the EC2
+<br>
+/path/my-file.txt : Directory of file from a localhost directory that will be sent to the EC2 <br>
+<br>
 ec2-user : Depending on the image of the ec2, whether its Amazon or Ubuntu image, then ec2-user or ubuntu needs to be put here respectively <br>
-my-instance-public-dns-name : This is the Public IPv4 DNS and can be retrieved on the EC2 page
-path/ : Folder the files will be sent to on the EC2. Once again, create a folder before running this command on the EC2 to send the files to.  
-
+<br>
+my-instance-public-dns-name : This is the Public IPv4 DNS and can be retrieved on the EC2 page <br>
+<br>
+path/ : Folder the files will be sent to on the EC2. Once again, create a folder before running this command on the EC2 to send the files to.  <br>
+<br>
 
 
 
