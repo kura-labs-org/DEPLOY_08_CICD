@@ -1,10 +1,14 @@
 describe('Title', () => {
-    it('Has the right title', () => {
-        cy.visit('http://3.82.217.25:3000/')
+    it('has the right title', () => {
+        cy.visit('http://3.82.217.25:3000')
 
-        cy.get('title')
+        cy.get('h1')
             .invoke('text')
             .should("equal", "React App")
+        Cypress.Screenshot.defaults({
+        capture: 'runner',
+        })
+        cy.screenshot();
     });
 
 });
