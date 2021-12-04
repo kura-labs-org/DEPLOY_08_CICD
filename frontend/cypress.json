@@ -1,1 +1,10 @@
-{}
+{
+    "reporter": "junit",
+    "reporterOptions": {
+      "mochaFile": "results/cypress-report.xml",
+      "toConsole": true
+    },
+    "integrationFolder":"./cypress/integration",
+    "testFiles":"**.spec.js"
+    
+  }
