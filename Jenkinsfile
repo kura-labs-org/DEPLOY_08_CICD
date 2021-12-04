@@ -11,26 +11,20 @@ pipeline {
     stage ('Build Application') {
       
       steps {
-        sh 'rm -rf ./kura_test_repo/cypress2'
         dir('./frontend'){
           sh '''
             npm install
-            npm run build
-            sudo npm install -g serve
-            serve -s build &
+            # sudo npm install -g serve
+            npm run start &
             '''
-        } 
         
       }
     }
     stage ('Testing Frontend w/ Cypress') {
-      agent {
-        label 'Agent Two'
-      }
       steps {
         dir('./frontend'){
           sh '''
-            npx cypress run --spec ./cypress/integration/test_frontend.spec.js
+            npx cypress run --spec ./cypress/integration/0-frontend-app/test_frontend.spec.js
             '''
         }
 
@@ -38,14 +32,14 @@ pipeline {
       
       post {
         always {
-           dir('./kura_test_repo'){
+           dir('./frontend'){
             junit 'results/cypress-report.xml'
            }
         }
       }
     }
 
-    stage ('Build Docker Image'){
+    /* stage ('Build Docker Image'){
 
     }
 
@@ -59,6 +53,6 @@ pipeline {
 
     stage ('Deploy') {
 
-    }
+    } */
   }
 }
