@@ -1,5 +1,11 @@
 # Deploy_full_stack_app
 
+## Though Process/Flow of Deployment 
+
+### Creating Infrastructure 
+
+The infrastructure consists of 3 total EC2s running an Ubuntu AMI from aws. One EC2 is the Jenkins Master/Controller, the other is the Jenkins Agent which builds and tests the application, and lastly the third EC2 is the production agent.
+
 ## Steps to Replicate 
 
 ### Provisioning Infrastructure through Ansible
