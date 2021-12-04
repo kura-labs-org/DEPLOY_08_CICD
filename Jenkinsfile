@@ -25,8 +25,7 @@ pipeline {
       steps {
         dir('./frontend'){
           sh '''
-            ls ./cypress/integration
-            npx cypress run --spec ./cypress/integration/0-frontend-app/test_frontend.spec.js
+            npx cypress run --spec ./cypress/integration/0-frontend-app/testing_frontend.spec.js
             '''
         }
 
