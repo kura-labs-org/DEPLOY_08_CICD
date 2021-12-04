@@ -1,10 +1,14 @@
 describe('Title', () => {
-    it('has the right title', () => {
+    it('has the right header', () => {
         cy.visit('http://127.0.0.1:3000')
 
-        cy.get('title')
+        cy.get('h1')
             .invoke('text')
-            .should("equal", "React App")
+            .should("equal", "Hello again react")
+        Cypress.Screenshot.defaults({
+        capture: 'runner',
+        })
+        cy.screenshot();
     });
 
 });
