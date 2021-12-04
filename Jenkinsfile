@@ -67,13 +67,13 @@ pipeline {
     }
 
     stage ("Login to Docker"){
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        sh '''echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'''
     }
 
     stage ("Push to Dockerhub"){
 
-      sh 'docker push zcyrus/react-front:latest'
-      sh 'docker push zcyrus/python-backend:latest'
+      sh '''docker push zcyrus/react-front:latest'''
+      sh '''docker push zcyrus/python-backend:latest'''
 
     }
 
