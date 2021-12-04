@@ -36,6 +36,7 @@ java -version
         <img style="float: center;" src=/deployment8/task1/3.png width="1000" />
      </h1>
 </html> 
+Java 11 must be installed on every EC2
 
 ```
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
