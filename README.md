@@ -11,7 +11,7 @@ Create an three Amazon EC2. In this demonstration, Ubuntu AMI's was used. <br>
 <br>
 Run the following commands to install Jenkins:
 ```
-
+sudo apt search openjdk
 ```
 
 
