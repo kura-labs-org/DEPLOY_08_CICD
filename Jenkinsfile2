@@ -1,0 +1,20 @@
+pipeline {
+  agent {
+      label 'agent1'
+  }
+  stages {
+    stage ('Docker Image Make') {
+      agent {
+        label 'agent2'
+      }
+      steps {
+      sh ''' 
+         docker build -t backend_flask .
+         docker tag backend_flask:latest public.ecr.aws/a8o2g9z3/backend_flask:latest
+         docker push public.ecr.aws/a8o2g9z3/backend_flask:latest
+        '''
+      }
+    }
+
+  }
+} 
