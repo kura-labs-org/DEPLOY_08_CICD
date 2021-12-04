@@ -1,0 +1,72 @@
+Resources:
+  MasterSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: String
+      GroupName: "MasterSG"
+      SecurityGroupIngress:
+        - IpProtocol: TCP
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: TCP
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+  AgentSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security group that allows SSH from anywhere"
+      GroupName: "AgentSG"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+  DockerSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security group that allows SSH from anywhere"
+      GroupName: "DockerSG"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  Master:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-09e67e426f25ce0d7
+      InstanceType: t2.micro
+      KeyName: "dp3"
+      SecurityGroupIds:
+        - !Ref MasterSG
+      Tags:
+        - Key: "Name"
+          Value: "Master"
+  Agent:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-09e67e426f25ce0d7
+      InstanceType: t2.micro
+      KeyName: "dp3"
+      SecurityGroupIds:
+        - !Ref AgentSG
+      Tags:
+        - Key: "Name"
+          Value: "Agent"
+  Docker:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-09e67e426f25ce0d7
+      InstanceType: t2.micro
+      KeyName: "dp3"
+      SecurityGroupIds:
+        - !Ref DockerSG
+      Tags:
+        - Key: "Name"
+          Value: "Docker"
