@@ -175,7 +175,7 @@ sudo nano key.pem
 Afterwards, a blank screen should appear where the pem file contents can now be pasted into the 'key.pem' file
 15. Now from the Master, its possible to access the agent EC2's from the terminal as shown below: 
 ```
-sudo ssh -i key.pem ubuntu@""
+sudo ssh -i key.pem ubuntu@
 ```
 "" : The EC2 Ipv4 private address
 <html>
