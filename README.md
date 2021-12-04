@@ -62,7 +62,13 @@
 
 ### Creating our Jenkins Pipeline
 
+1. Create a new item in the Jenkins website using the multi branch configuration and name it whatever you want. 
+2. Click build now when your repository is to run the Jenkins script.
+3. The pipeline is meant to build our frontend application and test it with cypress, then move on to building our front and backend with the respective Dockerfile in each directory, and finally push those images to our Dockerhub.
 
+### Creating a Cloud Watch Alarm
+
+1. Go to your AWS EC2 console, navigate to your production EC2, click actions, then click monitor and troubleshoot, and finally click manage cloud watch alarms.
 
 
 #### Todo 
@@ -70,11 +76,10 @@
 1. ~~Update bash script to install jenkins on an ubuntu instance on AWS~~
 2. ~~Add Production environment to list of instances to be created.~~
 3. ~~Create a playbook to install universal dependencies on all environments such as java, git, etc~~
-4. Frontend App requires Javascript and the backend app requires Python. 
+4. ~~Frontend App requires Javascript and the backend app requires Python.~~
 
 
 #### Fun Errors
- 
 1. The Jenkins install page is out of date doesn't point to right key location
 2. Used git reset to undo 2 previous commits cause they contained AWS credentials in the secrets.yaml file.
     ```
@@ -82,3 +87,4 @@
     ```
 3. There's currently a webpack error (used by React) and the latest Node version (17.0) so had to downgrade my Node image to  16.3.0
 4. There's an error with the python application where it can't use _mysql so I can't connect to AWS rds
+5. Experiencing timeout errors preventing me from running my pipeline all the way.
