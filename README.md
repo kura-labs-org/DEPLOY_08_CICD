@@ -13,6 +13,7 @@ Run the following commands to install Jenkins:
 ```
 sudo apt search openjdk
 ```
+
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task1/1.png width="1000" />
