@@ -23,6 +23,11 @@
       pkg:
       - openjdk-11-jdk
 
+  - name: Install xvfb # needed for cypress to run
+    apt:
+      pkg:
+      - xvfb
+
 - name: Install stress on production EC2
   become: true 
   hosts: Production 
