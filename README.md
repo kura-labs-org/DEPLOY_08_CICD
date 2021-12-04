@@ -69,6 +69,22 @@
 ### Creating a Cloud Watch Alarm
 
 1. Go to your AWS EC2 console, navigate to your production EC2, click actions, then click monitor and troubleshoot, and finally click manage cloud watch alarms.
+2. Set the parameters to what I have in the following or adjust to your liking. 
+    ![Cloud Watch Confi](/screenshots/cloud_watch_config.png)
+3. Now to set off the alarm run
+    ```
+    stress-ng --cpu 4 --timeout 120s
+    ```
+4. Now check the results in console and take a screenshot.
+
+### Encrypting Test Results and Cloud watch results
+
+1. Use ansible-vault encrypt to encrypt your files with ansible.
+
+    ```
+    ansible-vault encrypt /path/to/file/cypress-report.xml 
+    ```
+
 
 
 #### Todo 
