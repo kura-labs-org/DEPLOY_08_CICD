@@ -5,6 +5,6 @@
       "toConsole": true
     },
     "integrationFolder":"./cypress/integration/0-frontend-app",
-    "testFiles":"**.spec.js"
-    
+    "testFiles":"**.spec.js",
+    "video": false
   }
