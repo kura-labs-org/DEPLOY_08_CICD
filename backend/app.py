@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\TyronePS\\Desktop\\test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:testtest@database-1.cjgr7hsrhsor.us-east-1.rds.amazonaws.com:3306/datebase-1'
 
 app.config['SQLALCHEMY_DATABASE_TRACK_MODIFICATIONS'] = False
 
