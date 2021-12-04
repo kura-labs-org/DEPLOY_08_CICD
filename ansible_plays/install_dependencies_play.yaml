@@ -13,6 +13,7 @@
 
   - name: Install nodejs and npm
     apt:
+      update_cache: yes
       pkg:
       - nodejs
       - npm
@@ -22,7 +23,6 @@
       pkg:
       - openjdk-11-jdk
 
----
 - name: Install stress on production EC2
   become: true 
   hosts: Production 
