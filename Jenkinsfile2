@@ -9,7 +9,7 @@ pipeline {
       }
       steps {
       sh ''' 
-         docker build -t backend_flask .
+         docker build -t backend_flask -f Dockerfile2 .
          docker tag backend_flask:latest public.ecr.aws/a8o2g9z3/backend_flask:latest
          docker push public.ecr.aws/a8o2g9z3/backend_flask:latest
         '''
