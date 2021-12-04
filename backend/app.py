@@ -7,7 +7,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\TyronePS\\Desktop\\test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:hello123@database-1.cjgr7hsrhsor.us-east-1.rds.amazonaws.com:3306/testdb'
 
 app.config['SQLALCHEMY_DATABASE_TRACK_MODIFICATIONS'] = False
 
@@ -77,4 +77,5 @@ def delete_article(id):
     return article_schema.jsonify(article)
 
 if __name__ == "__main__":
-    app.run
+    db.create_all()
+    app.run()

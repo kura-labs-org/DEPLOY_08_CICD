@@ -1,0 +1,81 @@
+- name: EC2 Playbook
+  hosts: localhost
+  gather_facts: false
+  vars:
+    region: us-east-1
+    key_name: "change to a the name of SSH key you will use"
+    image_id: ami-083654bd07b5da81d #set to ubuntu 20 as of 11/11/2021
+    key: usedFor
+    instance_type: t2.micro
+    keypair: "VPC-kura-useast1"
+  vars_files:
+    - 'defaultvariables.yaml'
+    - './variables/network_id.yaml'
+    -  './variables/SG_id.yaml'
+  tasks:
+  - name: Creating EC2 jenkins Main
+    community.aws.ec2_instance:
+      name: jenkinsmain
+      vpc_subnet_id: '{{subnetid_1}}'
+      instance_type: '{{instance_type}}'
+      security_group: '{{sgid_1}}'
+      network:
+        assign_public_ip: true
+      image_id: '{{image_id}}'
+      tags:
+        '{{key}}': Jenkins
+      region: '{{region}}'
+      key_name: '{{keypair}}'
+  - name: Creating EC2 jenkins agent
+    community.aws.ec2_instance:
+      name: jenkins agent
+      vpc_subnet_id: '{{subnetid_1}}'
+      instance_type: '{{instance_type}}'
+      security_group: '{{sgid_2}}'
+      network:
+        assign_public_ip: true
+      image_id: '{{image_id}}'
+      tags:
+        '{{key}}': JenkinsAgent
+      region: '{{region}}'
+      key_name: '{{keypair}}'
+  - name: Creating EC2 docker
+    community.aws.ec2_instance:
+      name: docker
+      vpc_subnet_id: '{{subnetid_1}}'
+      instance_type: '{{instance_type}}'
+      security_group: '{{sgid_3}}'
+      network:
+        assign_public_ip: true
+      image_id: '{{image_id}}'
+      tags:
+        '{{key}}': Docker
+      region: '{{region}}'
+      key_name: '{{keypair}}'
+  - name: Gather the Jenkins Main Instance IDs
+    command: aws ec2 describe-instances --filters Name=tag:Name,Values=jenkinsmain --query "Reservations[*].Instances[*].{Instance:InstanceId}" --output text
+    register: jenkinsmaindata
+  - debug: var=jenkinsmaindata
+  - name: Gather the Jenkins agent Instance IDs
+    command: aws ec2 describe-instances --filters Name=tag:Name,Values="jenkins agent" --query "Reservations[*].Instances[*].{Instance:InstanceId}" --output text
+    register: jenkinsagentdata
+  - name: Gather the Jenkins agent Instance IDs
+    command: aws ec2 describe-instances --filters Name=tag:Name,Values=docker --query "Reservations[*].Instances[*].{Instance:InstanceId}" --output text
+    register: dockerdata
+  - name: Assign variables to ID
+    set_fact:
+      jenkinsmainID: '{{jenkinsmaindata.stdout}}'
+      jenkinsagentID: '{{jenkinsagentdata.stdout}}'
+      dockerID: '{{dockerdata.stdout}}'
+  # - debug: var=jenkinsmainID
+  # - debug: var=jenkinsagentID
+  # - debug: var=dockerID
+  - name: Save IDs to a new file
+    lineinfile:
+      path: ./variables/ec2_id.yaml
+      line: "{{ item }}"
+      create: yes
+    with_items:
+      -  "{{ 'ec2_1:' + ' ' + jenkinsmainID }}"
+      -  "{{ 'ec2_2:' + ' ' + jenkinsagentID }}"
+      -  "{{ 'ec2_3:' + ' ' + dockerID }}"

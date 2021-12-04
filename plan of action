@@ -1,0 +1,36 @@
+instructions: on jenkins main
+front react ---> flask python ---> sqlite3
+buiild
+{agent}
+
+testing
+cypress for front end
+{agent}
+
+
+if all successs
+Dockerfile
+push to dockerhub
+{docker}
+
+reports
+{jenkins main}
+
+
+succeed?
+no succeed?
+encrypt
+push report to git
+
+use ansible for encryption
+
+
+
+
+will be using ansible to craete infrastructure on aws, set up EC2 for all programs.
+
+Still need to figure out where to deploy database.
+dockerize flask?
+dockerize react.
+
+map the network out.
