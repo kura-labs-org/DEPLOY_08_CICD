@@ -176,8 +176,19 @@ Afterwards, a blank screen should appear where the pem file contents can now be 
 <br>
 15. Now from the Master, its possible to access the agent EC2's from the terminal as shown below: 
 ```
-
+sudo ssh -i key.pem ubuntu@""
 ```
+"" : The EC2 IPv4 private address
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task1/21.png width="1000" />
+     </h1>
+</html> 
+If there was any issues connecting to one of the agent EC2's from the terminal, run in the Master EC2:
+```
+sudo chmod 400 key.pem
+```
+Then retry connecting to an EC2 agent
 
 # Task 2
 
