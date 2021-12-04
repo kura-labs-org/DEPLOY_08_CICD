@@ -7,11 +7,9 @@
 * 3rd EC2 - Production <br>
 
 2. **Creating the Master:**
-Create an three Amazon EC2. In this demonstration, Ubuntu AMI's was used. <br>
-<br>
-Run the following commands to install Jenkins:
+Create an three Amazon EC2. In this demonstration, Ubuntu AMI's was used. Run the following commands to install Jenkins:
 ```
-sudo apt install openjdk-11-jre-headless
+sudo apt search openjdk
 ```
 
 <html>
