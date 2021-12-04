@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('Build') { 
             steps { 
-                dir('application')
                 sh '''
+                   cd application
                    ls
                    pwd
                    '''
