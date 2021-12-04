@@ -18,6 +18,7 @@ pipeline {
             npm run start &
             '''
         
+        }
       }
     }
     stage ('Testing Frontend w/ Cypress') {
@@ -55,4 +56,3 @@ pipeline {
 
     } */
   }
-}
