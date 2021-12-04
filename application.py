@@ -7,7 +7,7 @@ application = app = Flask(__name__)
 
 @application.route("/", methods=["POST", "Get"])
 def home():
-    return render_template("./templates/front.html")
+    return render_template("front.html")
 
 @application.route("/result", methods=["POST", "GET"])
 def sub_budget():
