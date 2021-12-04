@@ -23,10 +23,20 @@
       pkg:
       - openjdk-11-jdk
 
-  - name: Install xvfb # needed for cypress to run
+  - name: Install cypress dependencies # needed for cypress to run
     apt:
       pkg:
       - xvfb
+      - libgtk2.0-0
+      - libgtk-3-0
+      - libgbm-dev
+      - libnotify-dev
+      - libgconf-2-4
+      - libnss3
+      - libxss1
+      - libasound2
+      - libxtst6
+      - xauth
 
 - name: Install stress on production EC2
   become: true 
