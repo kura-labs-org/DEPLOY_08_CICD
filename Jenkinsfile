@@ -23,6 +23,7 @@ pipeline {
       }
       steps {
       sh ''' 
+        sudo apt install nodejs npm
         npm install cypress 
         npm install mocha
         npx cypress run --spec ./test.spec.js
