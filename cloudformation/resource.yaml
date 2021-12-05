@@ -200,11 +200,11 @@ Resources:
       RouteTableId: !Ref PrivateRouteTable2
       SubnetId: !Ref PrivateSubnet2
 
-  JenkinsControllerSecurityGroup:
+  ControllerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Security group that allows SSH from anywhere"
-      GroupName: "JenkinsController"
+      GroupName: "Controller"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -216,7 +216,7 @@ Resources:
           CidrIp: 0.0.0.0/0
       VpcId: !Ref VPC
 
-  JenkinsControllerEC2Instance:
+  ControllerEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: ami-09e67e426f25ce0d7
@@ -224,16 +224,16 @@ Resources:
       SubnetId: !Ref PublicSubnet1
       KeyName: !Ref KeyName
       SecurityGroupIds:
-        - !Ref JenkinsControllerSecurityGroup
+        - !Ref ControllerSecurityGroup
       Tags:
         - Key: "Name"
           Value: "Jenkins Controller"
 
-  JenkinsAgentSecurityGroup:
+  AgentSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Security group that allows SSH from anywhere"
-      GroupName: "JenkinsAgent"
+      GroupName: "Agent"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -241,7 +241,7 @@ Resources:
           CidrIp: 0.0.0.0/0
       VpcId: !Ref VPC
 
-  JenkinsAgentEC2Instance:
+  AgentEC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: ami-09e67e426f25ce0d7
@@ -249,7 +249,7 @@ Resources:
       SubnetId: !Ref PublicSubnet1
       KeyName: !Ref KeyName
       SecurityGroupIds:
-        - !Ref JenkinsAgentSecurityGroup
+        - !Ref AgentSecurityGroup
       Tags:
         - Key: "Name"
           Value: "Jenkins Agent"
@@ -282,16 +282,11 @@ Resources:
   Deploy08DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Security group for the RDS MySQL database that allows access from Production/Agent SG only"
-      GroupName: "Deploy08-DB"
+      GroupDescription: "Security group for the RDS MySQL database that allows all traffic"
+      GroupName: "deploy08-database"
       SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 3306
-          ToPort: 3306
-          SourceSecurityGroupId:
-            Fn::GetAtt:
-              - ProductionSecurityGroup
-              - GroupId
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
       VpcId: !Ref VPC
 
 Outputs:
@@ -299,13 +294,13 @@ Outputs:
     Description: A reference to the created VPC
     Value: !Ref VPC
 
-  JenkinsControllerEC2Instance:
-    Value: !GetAtt JenkinsControllerEC2Instance.PublicIp
-    Description: JenkinsController's PublicIp Address
+  ControllerEC2Instance:
+    Value: !GetAtt ControllerEC2Instance.PublicIp
+    Description: ControllerEC2Instance's PublicIp Address
 
-  JenkinsAgentEC2Instance:
-    Value: !GetAtt JenkinsAgentEC2Instance.PublicIp
-    Description: JenkinsAgentEC2Instance's PublicIp Address
+  AgentEC2Instance:
+    Value: !GetAtt AgentEC2Instance.PublicIp
+    Description: AgentEC2Instance's PublicIp Address
 
   ProductionEC2Instance:
     Value: !GetAtt ProductionEC2Instance.PublicIp
