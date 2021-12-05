@@ -101,7 +101,7 @@ Results were then encrypted with ansible-vault.
 
 1. Go to your AWS EC2 console, navigate to your production EC2, click actions, then click monitor and troubleshoot, and finally click manage cloud watch alarms.
 2. Set the parameters to what I have in the following or adjust to your liking. 
-    ![Cloud Watch Confi](/screenshots/cloud_watch_config.png)
+    ![Cloud Watch Config](/screenshots/cloud_watch_config.png)
 3. Now to set off the alarm run
     ```
     stress-ng --cpu 4 --timeout 120s
@@ -121,7 +121,7 @@ Results were then encrypted with ansible-vault.
 ### Major Error
 
 - Building the frontend docker image on the Jenkins Agent seems to be using too many resources or is taking long to build, because it causes a timeout error specifically at the Docker build step and bricks the instance. I personally can't ssh into my EC2 after that happens. It seems that my CPU utilization is maxing out, shown from my cpu monitoring and stackoverflow research. The application builds locally on my own computer and builds when I ssh personally into my EC2. 
-[!Jenkins_Timeout](./errors/agent_timeout_error.png)
+![Jenkins_Timeout](./errors/agent_timeout_error.png)
 [Link to Jenkins console output](./errors/Jenkins_out_put.txt)
 
 
