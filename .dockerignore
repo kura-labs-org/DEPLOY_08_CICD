@@ -1,0 +1,7 @@
+dockerfile-R
+venv
+__pycache__
+cypress/
+DevSecOps.7z
+cypress.json
+documentation.md
