@@ -7,37 +7,37 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials("rixardo-dockerhub")
     }
 
-    // stages {
-    //     // Creating the front end application using NPM
-    //     stage('Build') { 
-    //         steps { 
-    //             sh '''
-    //             cd application
-    //             npm install
-    //             npm run build
-    //             sudo npm install -g serve
-    //             serve -s build &
-    //             '''
-    //             sh 'echo "completed build"'
-    //         }
-    //     }
-    //     // Testing the front end application
-    //     stage('Test') { 
-    //         steps { 
-    //             sh '''
-    //             npm install cypress
-    //             npm install mocha
-    //             sudo apt install npm xvfb libatk1.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth -y
-    //             npx cypress run --spec ./cypress/integration/test.spec.js
-    //             '''
-    //             sh 'echo "completed build"'
-    //         }
-    //         post {
-    //             always {
-    //             junit 'results/cypress-report.xml'
-    //             }
-    //         }
-    //     }
+    stages {
+        // Creating the front end application using NPM
+        stage('Build') { 
+            steps { 
+                sh '''
+                cd application
+                npm install
+                npm run build
+                sudo npm install -g serve
+                serve -s build &
+                '''
+                sh 'echo "completed build"'
+            }
+        }
+        // Testing the front end application
+        stage('Test') { 
+            steps { 
+                sh '''
+                npm install cypress
+                npm install mocha
+                sudo apt install npm xvfb libatk1.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth -y
+                npx cypress run --spec ./cypress/integration/test.spec.js
+                '''
+                sh 'echo "completed build"'
+            }
+            post {
+                always {
+                junit 'results/cypress-report.xml'
+                }
+            }
+        }
 
         stage('Packaging') { 
             steps {
