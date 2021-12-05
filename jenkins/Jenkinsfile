@@ -41,8 +41,8 @@ pipeline {
 
         stage('Packaging') { 
             steps {
-                sh 'echo "$(ls)"'
-                sh 'echo "$(pwd)"'                
+                sh 'echo $(ls)'
+                sh 'echo $(pwd)'                
                 sh 'docker build . -t rixardo/deploy08-frontend:latest -f /docker/Dockerfile-front'
                 sh 'echo "completed building front-end application"'
                 
