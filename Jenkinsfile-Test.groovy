@@ -39,6 +39,7 @@ pipeline {
     }
     stage ('Dockerize') {
       steps {
+        sh 'sudo chmod 666 /var/run/docker.sock'
         sh 'docker build -f dockerfile-R .'
         sh '''
         var1=$( docker images --filter 'dangling=true' --format "{{.ID}}" )
