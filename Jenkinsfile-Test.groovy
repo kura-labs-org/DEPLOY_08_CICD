@@ -34,6 +34,7 @@ pipeline {
     }
         stage ('Login') {
       steps {
+        sh'sudo apt install docker -y'
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
@@ -42,8 +43,8 @@ pipeline {
         sh 'docker build -f dockerfile-R .'
         sh '''
         var1=$( docker images --filter 'dangling=true' --format "{{.ID}}" )
-        docker tag $var1 kentan404/deploy8:react
-        docker push kentan404/deploy8:react
+        docker tag $var1 kentan404/deploy8-cicd:react
+        docker push kentan404/deploy8-cicd:react
         docker image prune -a -f
         '''
       }
