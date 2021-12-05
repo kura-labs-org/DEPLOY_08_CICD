@@ -4,7 +4,27 @@
 
 ### Creating Infrastructure 
 
-The infrastructure consists of 3 total EC2s running an Ubuntu AMI from aws. One EC2 is the Jenkins Master/Controller, the other is the Jenkins Agent which builds and tests the application, and lastly the third EC2 is the production agent.
+The infrastructure consists of 3 total EC2s running an Ubuntu AMI from aws. One EC2 is the Jenkins Master/Controller, the other is the Jenkins Agent which builds and tests the application, and lastly the third EC2 is the production agent which would host the actual application. 
+
+The infraction was automatically provisioned through Ansible thanks to their AWS EC2 module. In hindsight working with Terraform instead to provision infrastructure would be a lot quicker and more clean. 
+
+### Configuring Infrastructure 
+
+All 3 EC2s have some overlapping dependencies and separate ones as well. This is where is ansible is once again helpful as we are able to categorize the hosts in different groups and install the needed packages to where it is needed. These were run with the intall_dependencies_play file and the install_docker_play file. This allows us to automate our configuration and if we have more EC2s that need this configuration we can add them to the group of hosts. 
+
+### Containerizing our Applications
+
+I decided that best course of action would be to containerize the frontend of the application and backend of the application separately. Then in the production environment you use docker network to allow the two applications to communicate with one another. 
+
+### Pipeline
+
+For the pipeline I decided to go with a multibranch pipeline which will read my Jenkinsfile from the Github Repo. The pipeline will have 5 stages:
+1. Build the Frontend: this will build the frontend of the application on the Jenkins Agent and have it being served on port 3000, while it is running. 
+2. Testing the Frontend: this will test the frontend built in the earlier step using cypress. 
+3. Build the Docker images: this step will build the docker images based on the docker files for the backend and frontend. 
+4. Login to Dockerhub: this will login the user to their Dockerhub account. 
+5. Push Docker Image: This will push the docker images to Dockerhub.
+6. Deploy to Production: This would ssh into the production ec2 and pull the images recently pushed to dockerhub and run containers based on the images, all running on the same docker network.  
 
 ## Steps to Replicate 
 
