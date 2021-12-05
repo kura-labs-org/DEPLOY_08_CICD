@@ -2,6 +2,7 @@ pipeline {
     agent {
         label "agent"
     }
+
     stages {
         // Creating the front end application using NPM
         stage('Build') { 
@@ -24,8 +25,36 @@ pipeline {
                 npm install mocha
                 sudo apt install npm xvfb libatk1.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth -y
                 npx cypress run --spec ./cypress/integration/test.spec.js
+                cd /cypress/
                 '''
                 sh 'echo "completed build"'
+            }
+            post {
+                always {
+                junit 'results/cypress-report.xml'
+                }
+            }
+        }
+
+        environment {
+            DOCKERHUB_CREDENTIALS = credentials("rixardo-dockerhub")
+        }
+        stage('Packaging') { 
+            steps {
+                sh 'docker build . -t rixardo/deploy08-frontend:latest -f /docker/Dockerfile-front'
+                sh 'echo "completed building front-end application"'
+                
+                sh 'docker build . -t rixardo/deploy08-backend:latest -f /docker/Dockerfile-back'
+                sh 'echo "completed building back-end application"'
+                
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'echo "completed login"'
+
+                sh 'docker push rixardo/deploy08-frontend:latest'
+                sh 'echo "completed pushing front-end application"'
+
+                sh 'docker push rixardo/deploy08-backend:latest'
+                sh 'echo "completed pushing back-end application"'
             }
             post {
                 always {
