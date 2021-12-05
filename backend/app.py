@@ -1,13 +1,17 @@
 from flask import Flask, jsonify, request
+from os import environ
+from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 
+load_dotenv()
+
 app = Flask(__name__)
 CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\TyronePS\\Desktop\\test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
 
 app.config['SQLALCHEMY_DATABASE_TRACK_MODIFICATIONS'] = False
 
@@ -30,7 +34,6 @@ class ArticleSchema(ma.Schema):
 
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
-
 
 @app.route('/get', methods = ['GET'])
 def get_articles():
@@ -77,4 +80,4 @@ def delete_article(id):
     return article_schema.jsonify(article)
 
 if __name__ == "__main__":
-    app.run
+    db.create_all()

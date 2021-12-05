@@ -1,0 +1,8 @@
+node_modules/
+/ansible_plays/secrets.yaml
+/ansible_plays/aws_inventory
+venv/
+.env
+__pycache__
+frontend/cypress/screenshots
+frontend/cypress/videos
