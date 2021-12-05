@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y
-COPY ./backend /home/ubuntu/application/
+WORKDIR /app
+COPY . ./
 RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
 RUN apt-get install python3-dev default-libmysqlclient-dev build-essential -y
