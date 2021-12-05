@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+COPY . /app
+
+WORKDIR /app
+
+RUN apt update && apt upgrade -y
+RUN apt install npm -y
+
+RUN npm install
+RUN npm run start
