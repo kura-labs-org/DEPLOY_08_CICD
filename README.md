@@ -26,6 +26,11 @@ For the pipeline I decided to go with a multibranch pipeline which will read my 
 5. Push Docker Image: This will push the docker images to Dockerhub.
 6. Deploy to Production: This would ssh into the production ec2 and pull the images recently pushed to dockerhub and run containers based on the images, all running on the same docker network.  
 
+### Monitoring 
+
+Lastly I set up a cloud watch alarm on AWS to monitor that the average CPU utilization doesn't go above 70% if it does it will set off the alarm. 
+Results were then encrypted with ansible-vault.
+
 ## Steps to Replicate 
 
 ### Provisioning Infrastructure through Ansible
@@ -115,7 +120,7 @@ For the pipeline I decided to go with a multibranch pipeline which will read my 
 
 ### Major Error
 
-- Building the docker image on the Jenkins AGent seems to be using too many resources or is taking long to build, because it causes a timeout error specfically at the Docker build step and bricks the instance. I personally can't ssh into my EC2 after that happens. 
+- Building the frontend docker image on the Jenkins Agent seems to be using too many resources or is taking long to build, because it causes a timeout error specifically at the Docker build step and bricks the instance. I personally can't ssh into my EC2 after that happens. It seems that my CPU utilization is maxing out, shown from my cpu monitoring and stackoverflow research. The application builds locally on my own computer and builds when I ssh personally into my EC2. 
 [!Jenkins_Timeout](./errors/agent_timeout_error.png)
 [Link to Jenkins console output](./errors/Jenkins_out_put.txt)
 
