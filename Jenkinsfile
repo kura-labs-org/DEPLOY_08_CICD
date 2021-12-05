@@ -3,9 +3,8 @@ pipeline {
       label 'agent-d8'
   }
   stages {
-    stage ('Build stage') {
+    stage ('Build') {
       steps {
-   
       sh '''
         npm install
         npm run build
@@ -15,12 +14,11 @@ pipeline {
         sh 'echo "Build stage finised."'
       }
     }
-    stage ('Test stage') 
+    stage ('Second') {
       steps {
       sh ''' 
         npm install cypress
         npm install mocha
-        sudo apt-get install -y xvfb
         npx cypress run --spec ./cypress/integration/test.spec.js
         npm test
         '''
@@ -34,3 +32,4 @@ pipeline {
       }
     }
   }
+} 
