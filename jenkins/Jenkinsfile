@@ -44,13 +44,13 @@ pipeline {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'echo "completed login"'
             
-                sh 'docker build -f ./application/frontend . -t rixardo/deploy08-frontend:latest'
+                sh 'docker build -f ./application/frontend/Dockerfile . -t rixardo/deploy08-frontend:latest'
                 sh 'echo "completed building front-end application"'
 
                 sh 'docker push rixardo/deploy08-frontend:latest'
                 sh 'echo "completed pushing front-end application"'
 
-                sh 'docker build -f ./application/backend . -t rixardo/deploy08-backend:latest'
+                sh 'docker build -f ./application/backend/Dockerfile . -t rixardo/deploy08-backend:latest'
                 sh 'echo "completed building back-end application"'
 
                 sh 'docker push rixardo/deploy08-backend:latest'
