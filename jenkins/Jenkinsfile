@@ -46,7 +46,7 @@ pipeline {
 
                 sh 'echo $(pwd)'
                 sh 'echo $(ls)'
-                sh 'cd application/frontend'
+                sh 'cd ./application/frontend'
                 sh 'echo $(pwd)'
                 sh 'echo $(ls)'               
                 sh 'docker build -t rixardo/deploy08-frontend:latest .'
@@ -57,7 +57,7 @@ pipeline {
 
                 sh 'echo $(pwd)'
                 sh 'echo $(ls)'
-                sh 'cd application/backend'               
+                sh 'cd ./application/backend'               
                 sh 'docker build -t rixardo/deploy08-backend:latest .'
                 sh 'echo "completed building back-end application"'
 
