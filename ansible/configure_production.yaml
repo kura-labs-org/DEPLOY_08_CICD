@@ -11,7 +11,7 @@
     - name: installing java
       shell: sudo apt install openjdk-11-jre-headless -y
 
-    - name: downloading dependencies
+    - name: downloading dependencies for docker
       shell: sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
 
     - name: adding gpg keys
@@ -24,10 +24,10 @@
       shell: sudo apt-get update && sudo apt-get upgrade -y
 
     - name: installing latest version of docker
-      shell: sudo apt-get install docker-ce
+      shell: sudo apt-get install docker-ce -y
 
-    - name: installing latest version of docker
-      shell: sudo apt-get install docker-ce
+    - name: changing permissions for the docker socket
+      shell: sudo chmod 666 /var/run/docker.sock
 
     - name: starting docker
       shell: sudo systemctl start docker
