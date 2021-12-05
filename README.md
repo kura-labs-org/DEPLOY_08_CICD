@@ -14,7 +14,7 @@ All 3 EC2s have some overlapping dependencies and separate ones as well. This is
 
 ### Containerizing our Applications
 
-I decided that best course of action would be to containerize the frontend of the application and backend of the application separately. Then in the production environment you use docker network to allow the two applications to communicate with one another. 
+I decided that best course of action would be to containerize the frontend of the application and backend of the application separately. Then in the production environment you use docker network to allow the two applications to communicate with one another. I also added an environment variable in order to allow for a user to quickly change the DB URI incase it changes thus allowing a user to not have to touch the code. 
 
 ### Pipeline
 
@@ -111,14 +111,14 @@ For the pipeline I decided to go with a multibranch pipeline which will read my 
     ansible-vault encrypt /path/to/file/cypress-report.xml 
     ```
 
+## Errors
 
+### Major Error
 
-#### Todo 
+- Building the docker image on the Jenkins AGent seems to be using too many resources or is taking long to build, because it causes a timeout error specfically at the Docker build step and bricks the instance. I personally can't ssh into my EC2 after that happens. 
+[!Jenkins_Timeout](./errors/agent_timeout_error.png)
+[Link to Jenkins console output](./errors/Jenkins_out_put.txt)
 
-1. ~~Update bash script to install jenkins on an ubuntu instance on AWS~~
-2. ~~Add Production environment to list of instances to be created.~~
-3. ~~Create a playbook to install universal dependencies on all environments such as java, git, etc~~
-4. ~~Frontend App requires Javascript and the backend app requires Python.~~
 
 
 #### Fun Errors
