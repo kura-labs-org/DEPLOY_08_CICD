@@ -48,14 +48,14 @@ pipeline {
 
     stage ('Build Docker Image'){
       steps {
-        dir('./frontend'){
+        /* dir('./frontend'){
           sh '''
           sudo chmod 666 /var/run/docker.sock
           docker build -t zcyrus/react-front:latest .
           '''
 
         
-        }
+        } */
         dir('./backend'){
           sh '''
           docker build -t zcyrus/python-backend:latest . 
