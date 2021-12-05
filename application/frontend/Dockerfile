@@ -1,10 +1,7 @@
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y
-COPY ./public /home/ubuntu/application/
-COPY ./src /home/ubuntu/application/
-COPY ./package-lock.json /home/ubuntu/application/
-COPY ./package.json /home/ubuntu/application/
-WORKDIR /home/ubuntu/application/
+WORKDIR /app
+COPY . ./
 RUN apt-get update && apt-get install -y
 RUN apt-get install nodejs npm -y
 RUN npm install
