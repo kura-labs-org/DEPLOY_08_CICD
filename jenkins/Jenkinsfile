@@ -12,7 +12,7 @@ pipeline {
         stage('Build') { 
             steps { 
                 sh '''
-                cd application
+                cd application/frontend/
                 npm install
                 npm run build
                 sudo npm install -g serve
@@ -41,22 +41,25 @@ pipeline {
 
         stage('Packaging') { 
             steps {
-                sh 'echo $(ls)'
-                sh 'echo $(pwd)'                
-                sh 'docker build . -t rixardo/deploy08-frontend:latest -f /docker/Dockerfile-front'
-                sh 'echo "completed building front-end application"'
-                
-                sh 'docker build . -t rixardo/deploy08-backend:latest -f /docker/Dockerfile-back'
-                sh 'echo "completed building back-end application"'
-                
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'echo "completed login"'
+
+
+                sh 'cd /application/frontend'               
+                sh 'docker build -t rixardo/deploy08-frontend:latest .'
+                sh 'echo "completed building front-end application"'
 
                 sh 'docker push rixardo/deploy08-frontend:latest'
                 sh 'echo "completed pushing front-end application"'
 
+
+                sh 'cd /application/backend'               
+                sh 'docker build -t rixardo/deploy08-backend:latest .'
+                sh 'echo "completed building back-end application"'
+
                 sh 'docker push rixardo/deploy08-backend:latest'
                 sh 'echo "completed pushing back-end application"'
+
             }
             post {
                 always {
