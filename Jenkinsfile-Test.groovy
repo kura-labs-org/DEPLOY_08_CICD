@@ -37,12 +37,13 @@ pipeline {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
-    stage ('Push') {
+    stage ('Dockerize') {
       steps {
+        sh 'docker build -f dockerfile-R .'
         sh '''
         var1=$( docker images --filter 'dangling=true' --format "{{.ID}}" )
-        docker tag $var1 kentan404/deploy7repo:deploy7repo
-        docker push kentan404/deploy7repo:deploy7repo
+        docker tag $var1 kentan404/deploy8:react
+        docker push kentan404/deploy8:react
         docker image prune -a -f
         '''
       }
