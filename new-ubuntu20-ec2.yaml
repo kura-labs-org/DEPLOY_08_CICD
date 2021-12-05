@@ -1,0 +1,52 @@
+---
+
+- name: Spin up new ubuntu EC2
+  hosts: localhost
+  gather_facts: false
+  
+  tasks:
+  - name: start MASTER ubuntu
+    ec2_instance:
+      name: "Master EC2"
+      key_name: "ubuntu-aws"
+      vpc_subnet_id: subnet-01afc7aabbb35ba9e
+      instance_type: t2.micro
+      security_group: default
+      network:
+        assign_public_ip: true
+      image_id: ami-083654bd07b5da81d
+      tags:
+        Name: Ansible-Master
+      state: present 
+      wait: yes
+      
+  - name: start TEST ubuntu
+    ec2_instance:
+      name: "Test EC2"
+      key_name: "ubuntu-aws"
+      vpc_subnet_id: subnet-01afc7aabbb35ba9e
+      instance_type: t2.micro
+      security_group: sg-0fbf51002134f5c7a
+      network:
+        assign_public_ip: true
+      image_id: ami-083654bd07b5da81d
+      tags:
+        Name: Ansible-Test
+      state: present
+      wait: yes
+      
+  - name: start PROD ubuntu
+    ec2_instance:
+      name: "Prod EC2"
+      key_name: "ubuntu-aws"
+      vpc_subnet_id: subnet-01afc7aabbb35ba9e
+      instance_type: t2.micro
+      security_group: ansible-agent-sg
+      network:
+        assign_public_ip: true
+      image_id: ami-083654bd07b5da81d
+      tags:
+        Name: Ansible-Prod
+      state: present 
+      wait: yes
+      
