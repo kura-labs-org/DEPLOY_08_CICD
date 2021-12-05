@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+*{
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML 
+HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML 
+HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML HOME.HTML  */
+
+#home{
+    width: 100vw;
+    height: 100vh;
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#homeMenus{
+    width: 30vw;
+    height: 50vh;
+    margin: 10px;
+    border: 8px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+#homeLinks{
+    width: 80vw;
+    height: 10vh;
+    margin: 10px;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 20px;
+}
+
+#homeButton{
+    font-size: 30px;
+    background: rgb(235, 248, 229);
+    color: black;
+    position: bottom;
+    padding: 50px 20px;
+}
+
+#scanButton{
+    font-size: 30px;
+    background: rgb(196, 196, 196);
+    color: black;
+    position: bottom;
+    padding: 10% 20px;
+}
+
+a{
+    font-size: 40px;
+}
+
+/* SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML 
+SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML 
+SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML SCAN.HTML  */
+
+nav ul{
+    height: 125px;
+    width: 18%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+table{
+    border: 5px solid black;
+}
+
+.IN{
+    background-color: rgb(208, 245, 208);
+}
+
+.row{
+    background-color: rgb(208, 245, 208);
+}
+
+/* tr[data-status="IN"]{
+    background-color: rgb(208, 245, 208);
+} */
+
+tr[data-status2="OUT"]{
+    background-color: rgb(235, 191, 191);
+}
+
+.tableCell{
+    padding: 8px;
+}
+
+td{
+    padding: 8px;
+    text-align: center;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+#save{
+    width: 100vw;
+    height: 100vh;
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+nav{
+    width: 81vw;
+    height: 100px;
+    background: #FFF;
+    margin-top:20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: top;
+}
+
+
+
+h1{
+    color: green;
+    font-size: 80px;
+    font-family: 'Alfa Slab One', cursive;
+}
+
+h2{
+    color: green;
+    font-size: 40px;
+    font-family: 'Alfa Slab One', cursive;
+}
+
+/* INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML 
+INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML 
+INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML INVENTORY.HTML  */
+
+#invenBody{
+    width: 100vw;
+    height: 100vh;
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}

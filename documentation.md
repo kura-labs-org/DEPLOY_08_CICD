@@ -20,3 +20,28 @@ The pipeline must also build a testing container
 ### Task Notes from Tyrone
 Objective: Create application and test application. We've seen encryption of files through Ansible. 
 Security test, probably using nagiosxi. stressing out cpu is for us to be able to receive a cloudwatch report
+
+
+
+
+### Step 3
+Objective: Were going to set up a third EC2 as the production environment and run security tests.
+
+```
+We're going to set up an Ubuntu instance with the default settings. We're going to use gauntlt-docker and gruyere to test our instance. We first need to install a host of dependencies to make this all work. Use the following code:
+sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get update
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y python3-pip p7zip-full npm default-jre
+
+```
+
