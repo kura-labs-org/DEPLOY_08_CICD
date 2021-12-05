@@ -1,0 +1,127 @@
+---
+- name: Create Ec2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    region: us-east-1
+    ami: ami-083654bd07b5da81d
+    instance_type: t2.micro
+  
+  tasks: 
+###############################################################
+# Set up for the EC2 Master
+###############################################################
+    - name: Create Master Security Group
+      ec2_group:
+        name: "Master_SG"
+        description: "This security group is for the Jenkins Master"
+        region: '{{region}}'
+        rules: 
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 8080
+            to_port: 8080
+            cidr_ip: 0.0.0.0/0
+
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+      register: master_SG
+
+    - name: Create Jenkins Master
+      ec2:
+        #aws_access_key: "{{aws_keys}}"
+        #aws_secret_key: "{{aws_keys}}"
+        user_data: "{{ lookup('file', 'install_jenkins.sh') }}"
+        wait: yes
+        #key_name: aws_key_pair_name
+        image: "{{ami}}"
+        instance_type: "{{instance_type}}"
+        group_id: "{{master_SG.group_id}}"
+        instance_tags:
+          Name: D8-Master-Jenkins
+          Ansible: true 
+        region: "{{region}}"
+
+
+###############################################################
+# Set up for the EC2 Agent
+###############################################################
+    - name: Create Agent Security Group
+      ec2_group:
+        name: "Agent_SG"
+        description: "This security group is for the Jenkins Agent"
+        region: '{{region}}'
+        rules: 
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 8080
+            to_port: 8080
+            cidr_ip: 0.0.0.0/0
+
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+      register: agent_SG
+
+    - name: Create Jenkins Agent
+      ec2:
+     
+        user_data: "{{ lookup('file', 'agent_dependences.sh') }}"
+        wait: yes
+        key_name: aws_key_pair_name
+        image: "{{ami}}"
+        instance_type: "{{instance_type}}"
+        group_id: "{{agent_SG.group_id}}"
+        instance_tags:
+          Name: D8-Agent-Jenkins
+          Ansible: true 
+        region: "{{region}}"
+###############################################################
+# Set up for the Production EC2 
+###############################################################
+    - name: Production EC2 Security Group
+      ec2_group:
+        name: "EC2 Production Group"
+        description: "Security group for production"
+        region: '{{region}}'
+      
+        rules: 
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 3000
+            to_port: 3000
+            cidr_ip: 0.0.0.0/0
+
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+      register: third_ec2_SG
+
+    - name: Create Production EC2
+      ec2:
+     
+        user_data: "{{ lookup('file', 'install_docker.sh') }}"
+        wait: yes
+        key_name: aws_key_pair_name
+        image: "{{ami}}"
+        instance_type: "{{instance_type}}"
+        group_id: "{{third_ec2_SG.group_id}}"
+        instance_tags:
+          Name: Prod_3rd_ec2
+          Ansible: true 
+          Production: true
+        region: "{{region}}"
