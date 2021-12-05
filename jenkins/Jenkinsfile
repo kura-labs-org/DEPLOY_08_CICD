@@ -3,6 +3,10 @@ pipeline {
         label "agent"
     }
 
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials("rixardo-dockerhub")
+    }
+
     stages {
         // Creating the front end application using NPM
         stage('Build') { 
@@ -36,9 +40,6 @@ pipeline {
             }
         }
 
-        environment {
-            DOCKERHUB_CREDENTIALS = credentials("rixardo-dockerhub")
-        }
         stage('Packaging') { 
             steps {
                 sh 'docker build . -t rixardo/deploy08-frontend:latest -f /docker/Dockerfile-front'
