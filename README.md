@@ -6,7 +6,7 @@
 
 The infrastructure consists of 3 total EC2s running an Ubuntu AMI from aws. One EC2 is the Jenkins Master/Controller, the other is the Jenkins Agent which builds and tests the application, and lastly the third EC2 is the production agent which would host the actual application. 
 
-The infraction was automatically provisioned through Ansible thanks to their AWS EC2 module. In hindsight working with Terraform instead to provision infrastructure would be a lot quicker and more clean. 
+The infrastructure was automatically provisioned through Ansible thanks to their AWS EC2 module. In hindsight working with Terraform instead to provision infrastructure would be a lot quicker and more clean. 
 
 ### Configuring Infrastructure 
 
