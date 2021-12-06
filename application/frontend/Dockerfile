@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y
-COPY . /home/ubuntu/app
+COPY ./application/frontend/* /home/ubuntu/app
 WORKDIR /home/ubuntu/app
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 RUN apt-get install nodejs -y
