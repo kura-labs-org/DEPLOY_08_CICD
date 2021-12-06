@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-RUN apt-get update && apt-get install -y
+RUN apt-get update && apt-get upgrade -y
 COPY ./application/frontend/ /home/ubuntu/app/
 WORKDIR /home/ubuntu/app/
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
