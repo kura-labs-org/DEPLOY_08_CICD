@@ -4,8 +4,6 @@ import datetime
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 
-# https://pythonbasics.org/flask-sqlalchemy/
-# https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/
 app = Flask(__name__)
 CORS(app)
 
@@ -14,6 +12,7 @@ app.config[
 ] = "mysql://admin:abc123abc@database-1.cet4jo0trfys.us-east-1.rds.amazonaws.com:3306/deploy08"
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
@@ -36,8 +35,19 @@ class ArticleSchema(ma.Schema):
 
 article_schema = ArticleSchema()
 articles_schema = ArticleSchema(many=True)
-# use the below command to create the table and then comment it out once created
-# db.create_all()
+
+
+# This will check if the table "articles" is created. If it is not created, it will create it. If it is created, it will continue
+list_of_tables = db.engine.table_names()
+if "articles" in list_of_tables:
+    print(f"The table(s) {list_of_tables} are active")
+else:
+    print(f"The table(s) {list_of_tables} are inactive")
+    db.create_all()
+    list_of_tables = db.engine.table_names()
+    print(f"The table(s) {list_of_tables} are now active")
+
+
 @app.route("/get", methods=["GET"])
 def get_articles():
     all_articles = Articles.query.all()
@@ -85,6 +95,4 @@ def delete_article(id):
 
 
 if __name__ == "__main__":
-    db.create_all()
     app.run()
-    app.run(host="0.0.0.0")
