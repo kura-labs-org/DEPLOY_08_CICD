@@ -11,5 +11,4 @@ describe('Title', () => {
         })
         cy.screenshot();
     });
-
 });
