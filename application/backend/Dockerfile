@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y
-COPY . /home/ubuntu/app
+COPY ./application/backend/* /home/ubuntu/app
 WORKDIR /home/ubuntu/app
 RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
