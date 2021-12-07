@@ -68,6 +68,12 @@ pipeline {
                 sh 'docker stack deploy -c ./application/backend/docker-compose-stack.yml backend-app'
                 sh 'echo "deployed backend stack"'
             }
+            post {
+                always {
+                sh 'docker rmi rixardo/deploy08-frontend:latest'
+                sh 'docker rmi rixardo/deploy08-backend:latest'
+                }
+            }
         }
     }
 }
