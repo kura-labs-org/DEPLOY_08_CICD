@@ -55,5 +55,15 @@ pipeline {
 
             }
         }
+
+        stage('Deploying') { 
+            steps {
+                sh 'docker stack deploy -c ./application/frontend/Dockercompose.yml frontend-app'
+                sh 'echo "deployed frontend stack"'
+
+                sh 'docker stack deploy -c ./application/backend/Dockercompose.yml backend-app'
+                sh 'echo "deployed backend stack"'
+            }
+        }
     }
 }
