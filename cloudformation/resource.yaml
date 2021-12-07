@@ -257,12 +257,10 @@ Resources:
   ProductionSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Security group that allows SSH from anywhere"
+      GroupDescription: "Security group that allows all access"
       GroupName: "Production"
       SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
+        - IpProtocol: -1
           CidrIp: 0.0.0.0/0
       VpcId: !Ref VPC
 
