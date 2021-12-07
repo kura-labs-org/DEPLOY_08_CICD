@@ -1,5 +1,6 @@
 version: "3.7"
-service:
+
+services:
   frontend:
     image: rixardo/deploy08-frontend:latest
     ports:
