@@ -52,8 +52,12 @@ pipeline {
 
                 sh 'docker push rixardo/deploy08-backend:latest'
                 sh 'echo "completed pushing back-end application"'
-
             }
+            post {
+                always {
+                sh 'docker rmi rixardo/deploy08-frontend:latest'
+                sh 'docker rmi rixardo/deploy08-backend:latest'
+                }
         }
         
 
