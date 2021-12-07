@@ -48,20 +48,20 @@ else:
     print(f"The table(s) {list_of_tables} are now active")
 
 
-@app.route("/get", methods=["GET"])
+@app.route("/app/app-get", methods=["GET"])
 def get_articles():
     all_articles = Articles.query.all()
     results = articles_schema.dump(all_articles)
     return jsonify(results)
 
 
-@app.route("/get/<id>/", methods=["GET"])
+@app.route("/app/get/<id>/", methods=["GET"])
 def post_articles(id):
     article = Articles.query.get(id)
     return article_schema.jsonify(article)
 
 
-@app.route("/add", methods=["POST"])
+@app.route("/app/add", methods=["POST"])
 def add_article():
     title = request.json["title"]
     body = request.json["body"]
@@ -72,7 +72,7 @@ def add_article():
     return article_schema.jsonify(articles)
 
 
-@app.route("/update/<id>/", methods=["PUT"])
+@app.route("/app/update/<id>/", methods=["PUT"])
 def update_article(id):
     article = Articles.query.get(id)
 
@@ -86,7 +86,7 @@ def update_article(id):
     return article_schema.jsonify(article)
 
 
-@app.route("/delete/<id>/", methods=["DELETE"])
+@app.route("/app/delete/<id>/", methods=["DELETE"])
 def delete_article(id):
     article = Articles.query.get(id)
     db.session.delete(article)
