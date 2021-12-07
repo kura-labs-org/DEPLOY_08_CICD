@@ -58,6 +58,7 @@ pipeline {
                 sh 'docker rmi rixardo/deploy08-frontend:latest'
                 sh 'docker rmi rixardo/deploy08-backend:latest'
                 }
+            }
         }
         
 
