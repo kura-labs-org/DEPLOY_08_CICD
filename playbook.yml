@@ -30,7 +30,7 @@
   - name: download openjdk11
     shell: sudo apt install openjdk-11-jdk -y
 
-#below commands may not work so just do them manually...
+#below commands may not work so just do them manually... and comment the rest out
 - name: ssh into Ec2 and install docker
   hosts: ubuntu2
   become: yes
