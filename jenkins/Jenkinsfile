@@ -58,6 +58,7 @@ pipeline {
 
         stage('Deploying') { 
             steps {
+                sh 'docker swarm init'
                 sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
                 sh 'echo "deployed frontend stack"'
 
