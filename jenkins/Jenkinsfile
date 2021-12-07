@@ -58,10 +58,10 @@ pipeline {
 
         stage('Deploying') { 
             steps {
-                sh 'docker stack deploy -c ./application/frontend/Dockercompose.yml frontend-app'
+                sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
                 sh 'echo "deployed frontend stack"'
 
-                sh 'docker stack deploy -c ./application/backend/Dockercompose.yml backend-app'
+                sh 'docker stack deploy -c ./application/backend/docker-compose-stack.yml backend-app'
                 sh 'echo "deployed backend stack"'
             }
         }
