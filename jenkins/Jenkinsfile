@@ -56,10 +56,11 @@ pipeline {
             }
         }
         
-    agent {
-        label "jenkins-production"
-    }
+
         stage('Deploying') { 
+            agent {
+                label "jenkins-production"
+            }
             steps {
                 sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
                 sh 'echo "deployed frontend stack"'
