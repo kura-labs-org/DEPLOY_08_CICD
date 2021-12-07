@@ -95,7 +95,7 @@ def delete_article(id):
     return article_schema.jsonify(article)
 
 
-@app.route("/app/health")
+@app.route("/app/health", methods=["GET"])
 def health():
     if health_status:
         resp = jsonify(health="healthy")
