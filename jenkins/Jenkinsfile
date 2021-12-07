@@ -56,9 +56,9 @@ pipeline {
             }
         }
         
-        agent {
-            label "jenkins-production"
-        }
+    agent {
+        label "jenkins-production"
+    }
         stage('Deploying') { 
             steps {
                 sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
