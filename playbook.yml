@@ -30,6 +30,7 @@
   - name: download openjdk11
     shell: sudo apt install openjdk-11-jdk -y
 
+#below commands may not work so just do them manually...
 - name: ssh into Ec2 and install docker
   hosts: ubuntu2
   become: yes
@@ -41,7 +42,15 @@
     shell: sudo apt search openjdk
   - name: download openjdk11
     shell: sudo apt install openjdk-11-jdk -y
-  - name: install docker engine
-    shell: sudo apt-get install -y docker.io
+  - name: install necessary packages
+    shell: sudo apt-get install \ ca-certificates \ curl \ gnupg \ lsb-release
+  - name: add GPG key
+    shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+  - name: setup stable repo
+    shell: echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - name: get update
+    shell: sudo apt-get update
+  - name: install more packages
+    shell: sudo apt-get install docker-ce docker-ce-cli containerd.io
   - name: chmod
     shell: sudo chmod 666 /var/run/docker.sock
