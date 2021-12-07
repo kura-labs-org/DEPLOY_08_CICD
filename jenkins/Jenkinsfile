@@ -11,15 +11,13 @@ pipeline {
         // Creating the front end application using NPM
         stage('Build') {
             steps {
-                sh ''
-                '
-                cd application / frontend /
-                    npm install
+                sh '''
+                cd application/frontend/
+                npm install
                 npm run build
                 sudo npm install - g serve
                 serve - s build &
-                    ''
-                '
+                '''
                 sh 'echo "Building Stage is Completed!"'
             }
 
@@ -27,10 +25,9 @@ pipeline {
         // Testing the front end application
         stage('Test') {
             steps {
-                sh ''
-                '
-                npx cypress run--spec. / cypress / integration / test.spec.js ''
-                '
+                sh '''
+                npx cypress run--spec. / cypress / integration / test.spec.js 
+                '''
                 sh 'echo "Testing Stage is Completed!"'
             }
 
