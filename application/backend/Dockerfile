@@ -1,10 +1,7 @@
-FROM ubuntu:latest
-RUN apt-get update && apt-get upgrade -y
-COPY ./application/backend/ /home/ubuntu/app/
-WORKDIR /home/ubuntu/app/
-RUN apt-get install python3 -y
-RUN apt-get install python3-pip -y
-RUN apt-get install python3-dev default-libmysqlclient-dev build-essential -y
-RUN pip3 install -r requirements.txt
+FROM python:3.10
+COPY . /root/flask
+WORKDIR ./root/flask
+RUN pip install -r requirements.txt
+ENV FLASK_APP=app.py
 EXPOSE 5000
-CMD [ "python3","-u", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD flask run --host=0.0.0.0

@@ -1,6 +1,6 @@
 export default class APIService {
     static UpdateArticle(id, body) {
-        return fetch(`http://production-1243623148.us-east-1.elb.amazonaws.com:5000/app/update/${id}/`, {
+        return fetch(`http://127.0.0.1:5000/update/${id}/`, {
             'method':'PUT',
             headers: {
               'Content-Type':'application/json'
@@ -12,7 +12,7 @@ export default class APIService {
     }
 
     static InsertArticle(body) {
-        return fetch(`http://production-1243623148.us-east-1.elb.amazonaws.com:5000/app/add`, {
+        return fetch(`http://127.0.0.1:5000/add`, {
             'method':'POST',
             headers: {
               'Content-Type':'application/json'
@@ -25,7 +25,7 @@ export default class APIService {
 
 
     static DeleteArticle(id) {
-        return fetch(`http://production-1243623148.us-east-1.elb.amazonaws.com:5000/app/delete/${id}/`, {
+        return fetch(`http://127.0.0.1:5000/delete/${id}/`, {
             'method':'Delete',
             headers: {
               'Content-Type':'application/json'

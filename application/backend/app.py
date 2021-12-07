@@ -49,20 +49,20 @@ else:
     print(f"The table(s) {list_of_tables} are now active")
 
 
-@app.route("/app/app-get", methods=["GET"])
+@app.route("/get", methods=["GET"])
 def get_articles():
     all_articles = Articles.query.all()
     results = articles_schema.dump(all_articles)
     return jsonify(results)
 
 
-@app.route("/app/get/<id>/", methods=["GET"])
+@app.route("/get/<id>/", methods=["GET"])
 def post_articles(id):
     article = Articles.query.get(id)
     return article_schema.jsonify(article)
 
 
-@app.route("/app/add", methods=["POST"])
+@app.route("/add", methods=["POST"])
 def add_article():
     title = request.json["title"]
     body = request.json["body"]
@@ -73,7 +73,7 @@ def add_article():
     return article_schema.jsonify(articles)
 
 
-@app.route("/app/update/<id>/", methods=["PUT"])
+@app.route("/update/<id>/", methods=["PUT"])
 def update_article(id):
     article = Articles.query.get(id)
 
@@ -87,7 +87,7 @@ def update_article(id):
     return article_schema.jsonify(article)
 
 
-@app.route("/app/delete/<id>/", methods=["DELETE"])
+@app.route("/delete/<id>/", methods=["DELETE"])
 def delete_article(id):
     article = Articles.query.get(id)
     db.session.delete(article)
@@ -95,7 +95,7 @@ def delete_article(id):
     return article_schema.jsonify(article)
 
 
-@app.route("/app/health", methods=["GET"])
+@app.route("/health", methods=["GET"])
 def health():
     if health_status:
         resp = jsonify(health="healthy")
@@ -108,4 +108,4 @@ def health():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
