@@ -1,12 +1,9 @@
-FROM ubuntu:latest
-RUN apt-get update && apt-get upgrade -y
-COPY ./application/frontend/ /home/ubuntu/app/
-WORKDIR /home/ubuntu/app/
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
-RUN apt-get install nodejs -y
-RUN apt-get install npm -y
+FROM node:latest
+WORKDIR /usr/src/app
+COPY ./application/frontend/package.json /usr/src/app
+COPY ./application/frontend/package-lock.json /usr/src/app
 RUN npm install
-RUN npm run build
-RUN npm install -g serve
+COPY ./application/frontend/ /usr/src/app
 EXPOSE 3000
-CMD ["serve", "-s", "build"]
+ENV NODE_SERVER_PORT=3000
+CMD ["npm", "run", "start"]
