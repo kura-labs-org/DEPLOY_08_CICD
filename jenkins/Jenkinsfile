@@ -9,69 +9,70 @@ pipeline {
 
     stages {
         // Creating the front end application using NPM
-        stage('Build') { 
-            steps { 
-                sh '''
-                cd application/frontend/
-                npm install
+        stage('Build') {
+            steps {
+                sh ''
+                '
+                cd application / frontend /
+                    npm install
                 npm run build
-                sudo npm install -g serve
-                serve -s build &
-                '''
-                sh 'echo "completed build"'
+                sudo npm install - g serve
+                serve - s build &
+                    ''
+                '
+                sh 'echo "Building Stage is Completed!"'
             }
+
         }
         // Testing the front end application
-        stage('Test') { 
-            steps { 
-                sh '''
-                npx cypress run --spec ./cypress/integration/test.spec.js
-                '''
-                sh 'echo "completed build"'
+        stage('Test') {
+            steps {
+                sh ''
+                '
+                npx cypress run--spec. / cypress / integration / test.spec.js ''
+                '
+                sh 'echo "Testing Stage is Completed!"'
             }
+
             post {
                 always {
-                junit 'results/cypress-report.xml'
+                    junit 'results/cypress-report.xml'
                 }
             }
         }
 
-        stage('Packaging') { 
+        stage('Dockerize') {
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'echo "completed login"'
+                sh 'echo "Log into DockerHub is Completed!"'
 
-                sh 'docker build -f ./application/frontend/Dockerfile . -t rixardo/deploy08-frontend:latest'
-                sh 'echo "completed building front-end application"'
+                // Building both Docker Images
+                sh 'docker build -f ./application/frontend/Dockerfile -t rixardo/frontend:latest .'
+                sh 'docker build -f ./application/backend/Dockerfile -t rixardo/backend:latest .'
+                sh 'echo "Building Frontend & Backend Docker Images is Completed!"'
 
-                sh 'docker push rixardo/deploy08-frontend:latest'
-                sh 'echo "completed pushing front-end application"'
-
-                sh 'docker build -f ./application/backend/Dockerfile . -t rixardo/deploy08-backend:latest'
-                sh 'echo "completed building back-end application"'
-
-                sh 'docker push rixardo/deploy08-backend:latest'
-                sh 'echo "completed pushing back-end application"'
+                // Pushing both Docker Images to DockerHub
+                sh 'docker push rixardo/frontend:latest'
+                sh 'docker push rixardo/backend:latest'
+                sh 'echo "Pushing Frontend & Backend Docker Images is Completed!"'
             }
             post {
                 always {
-                sh 'docker rmi rixardo/deploy08-frontend:latest'
-                sh 'docker rmi rixardo/deploy08-backend:latest'
+                    // Cleanup Agent
+                    sh 'docker rmi rixardo/frontend:latest'
+                    sh 'docker rmi rixardo/backend:latest'
                 }
             }
         }
-        
 
-        stage('Deploying') { 
+        stage('Deploy') {
             agent {
                 label "jenkins-production"
             }
             steps {
                 sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
-                sh 'echo "deployed frontend stack"'
-
                 sh 'docker stack deploy -c ./application/backend/docker-compose-stack.yml backend-app'
-                sh 'echo "deployed backend stack"'
+                sh 'echo "Deployment of Application is Completed!"'
             }
         }
     }

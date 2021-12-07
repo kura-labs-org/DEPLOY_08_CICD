@@ -2,6 +2,6 @@ version: "3.7"
 
 services:
   frontend:
-    image: rixardo/deploy08-frontend:latest
+    image: rixardo/frontend:latest
     ports:
       - "80:3000"
