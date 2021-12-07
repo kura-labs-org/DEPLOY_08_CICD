@@ -1,4 +1,4 @@
-load_balancer = "http://production-1243623148.us-east-1.elb.amazonaws.com"
+let load_balancer = "http://production-1243623148.us-east-1.elb.amazonaws.com"
 export default class APIService {
     static UpdateArticle(id, body) {
         return fetch(`${load_balancer}/app/update/${id}/`, {
