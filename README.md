@@ -22,7 +22,7 @@ In this project, we used AWS services and other software listed below.
 4. Ansible
 5. Cypress
 
-### Precedure:
+### Procedure:
 
 #### Task 1: 
 
