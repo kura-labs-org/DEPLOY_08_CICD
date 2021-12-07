@@ -6,6 +6,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+health_status = True
 
 app.config[
     "SQLALCHEMY_DATABASE_URI"
@@ -92,6 +93,18 @@ def delete_article(id):
     db.session.delete(article)
     db.session.commit()
     return article_schema.jsonify(article)
+
+
+@app.route("/app/health")
+def health():
+    if health_status:
+        resp = jsonify(health="healthy")
+        resp.status_code = 200
+    else:
+        resp = jsonify(health="unhealthy")
+        resp.status_code = 500
+
+    return resp
 
 
 if __name__ == "__main__":
