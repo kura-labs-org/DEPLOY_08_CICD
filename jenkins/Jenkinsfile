@@ -15,8 +15,8 @@ pipeline {
                 cd application/frontend/
                 npm install
                 npm run build
-                sudo npm install - g serve
-                serve - s build &
+                sudo npm install -g serve
+                serve -s build &
                 '''
                 sh 'echo "Building Stage is Completed!"'
             }
@@ -26,7 +26,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                npx cypress run--spec. / cypress / integration / test.spec.js 
+                npx cypress run --spec ./cypress/integration/test.spec.js
                 '''
                 sh 'echo "Testing Stage is Completed!"'
             }
