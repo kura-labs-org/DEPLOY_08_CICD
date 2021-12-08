@@ -45,7 +45,7 @@ pipeline {
 
                 // Building both Docker Images
                 sh 'docker build -f ./application/frontend/Dockerfile --cpu-shares 512 -t rixardo/frontend:latest .'
-                sh 'docker build -f ./application/frontend/Dockerfile --cpu-shares 512 -t rixardo/frontend:latest .'
+                sh 'docker build -f ./application/backend/Dockerfile --cpu-shares 512 -t rixardo/backend:latest .'
                 sh 'echo "Building Frontend & Backend Docker Images is Completed!"'
 
                 // Pushing both Docker Images to DockerHub
