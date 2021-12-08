@@ -44,8 +44,8 @@ pipeline {
                 sh 'echo "Log into DockerHub is Completed!"'
 
                 // Building both Docker Images
-                sh 'docker build -f ./application/frontend/Dockerfile -t rixardo/frontend:latest .'
-                sh 'docker build -f ./application/backend/Dockerfile -t rixardo/backend:latest .'
+                sh 'docker build -f ./application/frontend/Dockerfile --cpus=".5" -t rixardo/frontend:latest .'
+                sh 'docker build -f ./application/backend/Dockerfile --cpus=".5" -t rixardo/backend:latest .'
                 sh 'echo "Building Frontend & Backend Docker Images is Completed!"'
 
                 // Pushing both Docker Images to DockerHub
