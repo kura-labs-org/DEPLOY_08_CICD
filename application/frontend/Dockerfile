@@ -1,9 +1,7 @@
-FROM node:latest
+FROM node:16
 WORKDIR /usr/src/app
-COPY ./application/frontend/package.json /usr/src/app
-COPY ./application/frontend/package-lock.json /usr/src/app
+COPY ./application/frontend/package*.json ./
 RUN npm install
-COPY ./application/frontend/ /usr/src/app
+COPY ./application/frontend/ .
 EXPOSE 3000
-ENV NODE_SERVER_PORT=3000
 CMD ["npm", "run", "start"]
