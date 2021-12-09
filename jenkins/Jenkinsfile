@@ -56,6 +56,7 @@ pipeline {
             post {
                 always {
                     // Deleting previous containers and images 
+                    sh 'docker container kill $(docker ps -q) || true'
                     sh 'docker rm -vf $(docker ps -aq) || true'
                     sh 'docker rmi -f $(docker images -aq) || true'
                 }
@@ -68,6 +69,7 @@ pipeline {
             }
             steps {
                 // Deleting previous containers and images 
+                sh 'docker container kill $(docker ps -q) || true'
                 sh 'docker rm -vf $(docker ps -aq) || true'
                 sh 'docker rmi -f $(docker images -aq) || true'
 
