@@ -56,8 +56,8 @@ pipeline {
             post {
                 always {
                     // Deleting previous containers and images 
-                    sh 'docker rm -vf $(docker ps -aq)'
-                    sh 'docker rmi -f $(docker images -aq)'
+                    sh 'docker rm -vf $(docker ps -aq) || true'
+                    sh 'docker rmi -f $(docker images -aq) || true'
                 }
             }
         }
@@ -68,9 +68,9 @@ pipeline {
             }
             steps {
                 // Deleting previous containers and images 
-                sh 'docker rm -vf $(docker ps -aq)'
-                sh 'docker rmi -f $(docker images -aq)'
-                
+                sh 'docker rm -vf $(docker ps -aq) || true'
+                sh 'docker rmi -f $(docker images -aq) || true'
+
                 // Deplyoing using docker-compose
                 sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
                 sh 'docker stack deploy -c ./application/backend/docker-compose-stack.yml backend-app'
