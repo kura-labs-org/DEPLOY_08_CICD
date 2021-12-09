@@ -19,7 +19,7 @@ function ArticleList(props) {
         <div>
             {props.articles &&  props.articles.map(article => {
         return (
-          <div key = {article.id}>
+            <div key = {article.id}>
             <h2>{article.title}</h2>
             <p>{article.body}</p>
             <p>{article.date}</p>
@@ -27,7 +27,6 @@ function ArticleList(props) {
             < div className = "row">
                 <div div className = "col-ma-1">
                     <button className = "btn btn-primary" onClick = {() => editArticle(article)}> Update</button>
-                   
                 </div>
 
                 <div div className = "col">
@@ -36,10 +35,10 @@ function ArticleList(props) {
 
             </div>
 
-          </div>
+        </div>
 
         )
-      })}
+    })}
         </div>
     )
 }

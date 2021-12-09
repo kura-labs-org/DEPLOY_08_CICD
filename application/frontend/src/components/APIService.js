@@ -1,6 +1,6 @@
 export default class APIService {
     static UpdateArticle(id, body) {
-        return fetch(`http://127.0.0.1:5000/update/${id}/`, {
+        return fetch(`http://localhost:5000/update/${id}/`, {
             'method':'PUT',
             headers: {
               'Content-Type':'application/json'
@@ -12,7 +12,7 @@ export default class APIService {
     }
 
     static InsertArticle(body) {
-        return fetch(`http://127.0.0.1:5000/add`, {
+        return fetch(`http://localhost:5000/add`, {
             'method':'POST',
             headers: {
               'Content-Type':'application/json'
@@ -25,7 +25,7 @@ export default class APIService {
 
 
     static DeleteArticle(id) {
-        return fetch(`http://127.0.0.1:5000/delete/${id}/`, {
+        return fetch(`http://localhost:5000/delete/${id}/`, {
             'method':'Delete',
             headers: {
               'Content-Type':'application/json'
