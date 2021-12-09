@@ -55,9 +55,9 @@ pipeline {
             }
             post {
                 always {
-                    // Cleanup Agent
-                    sh 'docker rmi rixardo/frontend:latest'
-                    sh 'docker rmi rixardo/backend:latest'
+                    // Deleting previous containers and images 
+                    sh 'docker rm -vf $(docker ps -aq)'
+                    sh 'docker rmi -f $(docker images -aq)'
                 }
             }
         }
@@ -67,6 +67,11 @@ pipeline {
                 label "jenkins-production"
             }
             steps {
+                // Deleting previous containers and images 
+                sh 'docker rm -vf $(docker ps -aq)'
+                sh 'docker rmi -f $(docker images -aq)'
+                
+                // Deplyoing using docker-compose
                 sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
                 sh 'docker stack deploy -c ./application/backend/docker-compose-stack.yml backend-app'
                 sh 'echo "Deployment of Application is Completed!"'
