@@ -1,0 +1,72 @@
+Resources:
+  Ec2OneSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: String
+      GroupName: "Ec2OneSG"
+      SecurityGroupIngress:
+        - IpProtocol: TCP
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: TCP
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+  Ec2TwoSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security group that allows SSH from anywhere"
+      GroupName: "Ec2TwoSG"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 0.0.0.0/0
+  Ec2ThreeSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security group that allows SSH from anywhere"
+      GroupName: "Ec2ThreeSG"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  Ec2One:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-09e67e426f25ce0d7
+      InstanceType: t2.micro
+      KeyName: "saikey"
+      SecurityGroupIds:
+        - !Ref Ec2OneSG
+      Tags:
+        - Key: "Name"
+          Value: "Ec2One"
+  Ec2Two:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-09e67e426f25ce0d7
+      InstanceType: t2.micro
+      KeyName: "saikey"
+      SecurityGroupIds:
+        - !Ref Ec2TwoSG
+      Tags:
+        - Key: "Name"
+          Value: "Ec2Two"
+  Ec2Three:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-09e67e426f25ce0d7
+      InstanceType: t2.micro
+      KeyName: "saikey"
+      SecurityGroupIds:
+        - !Ref Ec2ThreeSG
+      Tags:
+        - Key: "Name"
+          Value: "Ec2Three"
