@@ -55,17 +55,21 @@ Next attach ec2 ip address to port 8080 get access to Jenkins. Next add given pa
 
 ![Screen Shot 2021-12-05 at 4 21 35 PM](https://user-images.githubusercontent.com/84725239/144764566-78e22c5f-7919-426c-967d-2a96493981a7.png)
 
+Select build executor status to add agent
+
 ![Screen Shot 2021-12-05 at 4 21 58 PM](https://user-images.githubusercontent.com/84725239/144764544-288771d7-a504-42bc-be02-a35ff2601db8.png)
+
+Select New Node
 
 ![Screen Shot 2021-12-05 at 4 22 10 PM](https://user-images.githubusercontent.com/84725239/144764547-3da91eb4-e227-405a-b938-5212e67af38b.png)
 
-![Screen Shot 2021-12-01 at 11 01 54 AM](https://user-i![Screen Shot 2021-12-01 at 11 02 11 AM](https://user-images.githubusercontent.com/84725239/144765436-8ba7e3a6-5a75-497c-9106-f13c1f37c7ee.png)
+Add node name and select permanent agent
 
-![Screen Shot 2021-12-01 at 11 02 11 AM](https://user-images.githubusercontent.com/84725239/144765461-619bbce2-bbb8-403d-bf10-41870c867713.png)
+![Screen Shot 2021-12-01 at 11 02 11 AM](https://user-images.githubusercontent.com/84725239/144765436-8ba7e3a6-5a75-497c-9106-f13c1f37c7ee.png)
 
+Add name of Agent and labels and number of executors and path
 
-
-
+For the name I named it Agentt and the number of executors at 2 and finally the path at /home/ubuntu/jenkins.
 
 Master -> Agent
 ```
@@ -75,11 +79,16 @@ $ nano ~/.ssh/authorized_keys
 $ ssh -i ~/.ssh/id_rsa ubuntu@<public.ip of agent>
 ```
 
-After this Multibranch pipeline was created.
+After these steps the Multibranch pipeline was created.
 
+Add the Github repository from which the assignment is being done under the HTTP Repository URL
 ![Screen Shot 2021-12-05 at 5 04 53 PM](https://user-images.githubusercontent.com/84725239/144765898-3b7acd1b-9314-498b-96a6-98e7d656d35b.png)
 
+Select Jenkinsfile to allow the build of the application to be run by the Jenkinsfile
+
 ![Screen Shot 2021-12-05 at 5 05 07 PM](https://user-images.githubusercontent.com/84725239/144765923-d0f905f7-6eea-49bb-a505-39e14e58c4e3.png)
+
+My Jenkinsfile
 
 ![Screen Shot 2021-12-05 at 5 16 25 PM](https://user-images.githubusercontent.com/84725239/144766120-558dd2db-bf4f-45e5-bda1-21cad47629e9.png)
 
