@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Scoutah</title>
+    <link href="./static/css/style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body id = "home">
+
+    <nav>
+      <h2>Equipment Tracker</h2>
+
+    </nav>
+
+    <div>
+        <table class = "table">
+            <tr class = "header">
+                {% for header in headings %}
+                <th class = "tableCell"> {{header}} </th>
+                {% endfor %}
+            </tr>
+
+            {% for row in inven_data %} 
+            <tr data-status= "IN" data-status2="OUT">
+                {% for item in row %}    
+                <td> {{item}} </td>
+                {% endfor %}
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <div id = "homeMenus">
+        <a href = "addEquipment" ><button id = "homeButton"> Add Equipment </button> </a>
+    </div>
+
+    <div id = "homeMenus">
+        <a href = "addMembers" > <button id = "homeButton"> Add Members </button> </a>
+    </div>
+    
+    <div id = "homeLinks">
+        HELP SECTION INC
+    </div>  
+
+    <div id = "homeLinks">
+        <a href = ""> <button id = "scanButton"> Scan an Item </button> </a>
+        <a href = "inventory">  Inventory </a>
+    </div>
+    
+
+    
+   
+    <!-- <script src="./static/js/script.js"></script> -->
+  </body>
+</html>
