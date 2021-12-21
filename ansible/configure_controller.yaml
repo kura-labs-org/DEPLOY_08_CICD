@@ -1,0 +1,40 @@
+---
+- name: "Configuring the Controller EC2 instance"
+  hosts: Controller
+  gather_facts: false
+  connection: ssh
+
+  tasks:
+    - name: updating the ec2 instance
+      shell: sudo apt-get update && sudo apt-get upgrade -y
+
+    - name: installing java
+      shell: sudo apt install openjdk-11-jre-headless -y
+
+    # https://www.jenkins.io/doc/book/installing/linux/
+    - name: getting the long term support release of jenkins
+      shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \ /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+    - name: signing the downloaded jenkins application and adding it to the repository
+      shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://pkg.jenkins.io/debian-stable binary/ | sudo tee \ /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+    - name: upgrading the repository
+      shell: sudo apt-get update && sudo apt-get upgrade -y
+
+    - name: installing the jenkins application.
+      shell: sudo apt-get install jenkins -y
+
+    - name: installing git tool
+      shell: sudo apt install git -y
+
+    - name: checking if jenkins is active
+      shell: sudo systemctl status jenkins | head -n 3
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
+
+    - name: outputting jenkins password
+      shell: echo "The Jenkins password is $(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)"
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines

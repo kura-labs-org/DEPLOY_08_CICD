@@ -1,0 +1,10 @@
+ansible/
+cloudformation/
+documentation/
+Dockerfile
+__pycache__
+cypress/
+DevSecOps.7z
+venv
+cypress.json
+documentation.md

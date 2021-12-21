@@ -1,0 +1,42 @@
+---
+- name: "Configuring the Production EC2 instance"
+  hosts: Production
+  gather_facts: false
+  connection: ssh
+
+  tasks:
+    - name: updating the ec2 instance
+      shell: sudo apt-get update && sudo apt-get upgrade -y
+
+    - name: installing java
+      shell: sudo apt install openjdk-11-jre-headless -y
+
+    - name: downloading dependencies for docker
+      shell: sudo apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+
+    - name: adding gpg keys
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+    - name: installing the docker repository
+      shell: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+
+    - name: upgrading the repository
+      shell: sudo apt-get update && sudo apt-get upgrade -y
+
+    - name: installing latest version of docker
+      shell: sudo apt-get install docker-ce -y
+
+    - name: changing permissions for the docker socket
+      shell: sudo chmod 666 /var/run/docker.sock
+
+    - name: starting docker
+      shell: sudo systemctl start docker
+
+    - name: configure docker to start on boot
+      shell: sudo systemctl enable docker
+
+    - name: checking if docker is active
+      shell: sudo systemctl status docker | head -n 3
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines

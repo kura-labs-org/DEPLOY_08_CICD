@@ -1,0 +1,83 @@
+pipeline {
+    agent {
+        label "jenkins-agent"
+    }
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials("rixardo-dockerhub")
+    }
+
+    stages {
+        // Creating the front end application using NPM
+        stage('Build') {
+            steps {
+                sh '''
+                cd application/frontend/
+                npm install
+                npm run build
+                sudo npm install -g serve
+                serve -s build &
+                '''
+                sh 'echo "Building Stage is Completed!"'
+            }
+
+        }
+        // Testing the front end application
+        stage('Test') {
+            steps {
+                sh '''
+                npx cypress run --spec ./cypress/integration/test.spec.js
+                '''
+                sh 'echo "Testing Stage is Completed!"'
+            }
+
+            post {
+                always {
+                    junit 'results/cypress-report.xml'
+                }
+            }
+        }
+
+        stage('Dockerize') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'echo "Log into DockerHub is Completed!"'
+
+                // Building both Docker Images
+                sh 'docker build -f ./application/frontend/Dockerfile --cpu-shares 512 -t rixardo/frontend:latest .'
+                sh 'docker build -f ./application/backend/Dockerfile --cpu-shares 512 -t rixardo/backend:latest .'
+                sh 'echo "Building Frontend & Backend Docker Images is Completed!"'
+
+                // Pushing both Docker Images to DockerHub
+                sh 'docker push rixardo/frontend:latest'
+                sh 'docker push rixardo/backend:latest'
+                sh 'echo "Pushing Frontend & Backend Docker Images is Completed!"'
+            }
+            post {
+                always {
+                    // Deleting previous containers and images 
+                    sh 'docker container kill $(docker ps -q) || true'
+                    sh 'docker rm -vf $(docker ps -aq) || true'
+                    sh 'docker rmi -f $(docker images -aq) || true'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            agent {
+                label "jenkins-production"
+            }
+            steps {
+                // Deleting previous containers and images 
+                sh 'docker container kill $(docker ps -q) || true'
+                sh 'docker rm -vf $(docker ps -aq) || true'
+                sh 'docker rmi -f $(docker images -aq) || true'
+
+                // Deplyoing using docker-compose
+                sh 'docker stack deploy -c ./application/frontend/docker-compose-stack.yml frontend-app'
+                sh 'docker stack deploy -c ./application/backend/docker-compose-stack.yml backend-app'
+                sh 'echo "Deployment of Application is Completed!"'
+            }
+        }
+    }
+}

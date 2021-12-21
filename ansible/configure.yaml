@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+    - debug:
+        msg: Configuring All 3 EC2 Instances.
+
+- name: configuring the controller ec2 instance
+  import_playbook: configure_controller.yaml
+
+- name: configuring the agent ec2 instance
+  import_playbook: configure_agent.yaml
+
+- name: configuring the production ec2 instance
+  import_playbook: configure_production.yaml
