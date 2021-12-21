@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href='/static/layout.css' />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetDb</title>
+</head>
+
+<body>
+    <div class="Game">
+        <b>Choose you player: 1. LeBron James 2. Michael Jordan 3. Kevin Durant...</b>
+        <form action='/result' method='post'>
+            Action: <input type='number' name='action'>
+            <input type='submit' value='submit'>
+        </form>
+        <p class="Computer">{{ choice }}</p>
+        <p class="WinOrLose">{{ WinLoseTie }}</p>
+    </div>
+</body>

@@ -1,0 +1,21 @@
+pipeline {
+  agent {
+      label 'production'
+  }
+  stages {
+    stage ('Build') {
+      steps {
+      sh '''
+      #! /bin/bash
+      python3 -m venv test3
+      . ./test3/bin/activate
+      pip install pip --upgrade
+      pip install pytest
+      pip install -r requirements.txt
+      export FLASK_APP=application.py 
+      flask run --host=0.0.0.0 & 
+      '''
+      }
+    }
+ }
+}
