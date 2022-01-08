@@ -199,6 +199,26 @@ Then retry connecting to an EC2 agent
 
 # Task 4
 1. Place all the files to an application in one folder that is accessible from your computer
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/1.png width="1000" />
+     </h1>
+</html> 
+
+The folder should contain your application files. Since a flask app is being deployed, a .py file is being deployed alongside a templates folder that includes html files and a requirements.txt for other computer to download and run this application.  <br>
+<br>
+The file "Dockerfile" runs a series of commands to successfully download all of the application files and create an image of the application. The contents of the Dockerfile is shown below:
+
+```
+FROM python:3.10
+COPY ./requirements.txt requirements.txt
+COPY templates/ /templates/
+RUN pip install -r requirements.txt
+COPY application.py application.py
+ENV FLASK_APP=application.py
+EXPOSE 5000
+CMD flask run --host=0.0.0.0
+```
 
 2. Open up the EC2 in the terminal that has docker installed
 
@@ -223,6 +243,15 @@ my-instance-public-dns-name : This is the Public IPv4 DNS and can be retrieved o
 path/ : Folder the files will be sent to on the EC2. Once again, create a folder before running this command on the EC2 to send the files to.  <br>
 <br>
 
+After successfully performing the scp command above, the files from your local system should appear in the EC2:
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/2.png width="1000" />
+     </h1>
+</html> 
+
+
+4. 
 
 
 
