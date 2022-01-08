@@ -275,14 +275,16 @@ sudo docker build -t ---- .
 ```
 sudo docker run -d -p 5000:5000 my_app_project
 ```
+
+```
+curl localhost:5000
+```
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task4/8.png width="1000" />
      </h1>
 </html> 
-```
-curl localhost:5000
-```
+
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task4/9.png width="1000" />
@@ -306,7 +308,7 @@ sudo docker login
 * The image should be named username/image name
 * username - The same name of your account username
 * image name - The name that is given to the image, which can be anything
-
+<br>
 7. Push the image
 <html>
      <h1>
