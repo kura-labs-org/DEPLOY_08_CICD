@@ -263,7 +263,7 @@ sudo docker build -t ---- .
 ```
 * ----: Can be the name that is given to the newly built image
 * . : Retrieves the Dockerfile and other files from the current directory. If the "." is not used, replace it with the current directory that contains the application files and Dockerfile.
-*  
+
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task4/7.png width="1000" />
@@ -309,6 +309,7 @@ sudo docker login
 * username - The same name of your account username
 * image name - The name that is given to the image, which can be anything
 <br>
+
 7. Push the image
 <html>
      <h1>
