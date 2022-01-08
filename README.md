@@ -243,7 +243,13 @@ my-instance-public-dns-name : This is the Public IPv4 DNS and can be retrieved o
 path/ : Folder the files will be sent to on the EC2. Once again, create a folder before running this command on the EC2 to send the files to.  <br>
 <br>
 
-After successfully performing the scp command above, the files from your local system should appear in the EC2:
+After successfully performing the scp command in a format shown below, the files from your local system should appear in the EC2:
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/6.png width="1000" />
+     </h1>
+</html> 
+
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task4/2.png width="1000" />
@@ -251,8 +257,74 @@ After successfully performing the scp command above, the files from your local s
 </html> 
 
 
-4. 
+4. After copying the files onto the EC2, build the application from the Dockerfile from the command shown below:
+```
+sudo docker build -t ---- .
+```
+* ----: Can be the name that is given to the newly built image
+* . : Retrieves the Dockerfile and other files from the current directory. If the "." is not used, replace it with the current directory that contains the application files and Dockerfile.
+*  
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/7.png width="1000" />
+     </h1>
+</html> 
 
 
+5. To run the application in the terminal, perform the "sudo docker run" command to first initialize the application and then "curl localhost:5000" to see the application
+```
+sudo docker run -d -p 5000:5000 my_app_project
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/8.png width="1000" />
+     </h1>
+</html> 
+```
+curl localhost:5000
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/9.png width="1000" />
+     </h1>
+</html>
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/10.png width="1000" />
+     </h1>
+</html> 
+
+6. To push the image from the EC2 to a Dockerhub account from the terminal, wrtie the command "sudo docker login" 
+```
+sudo docker login
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/13.png width="1000" />
+     </h1>
+</html> 
+* The image should be named username/image name
+* username - The same name of your account username
+* image name - The name that is given to the image, which can be anything
+
+7. Push the image
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/15.png width="1000" />
+     </h1>
+</html> 
+
+8. Go to the Dockerhub account that the image was pushed to and confirm if it was pushed
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/16.png width="1000" />
+     </h1>
+</html> 
+
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task4/17.png width="1000" />
+     </h1>
+</html> 
 
 # Task 5
