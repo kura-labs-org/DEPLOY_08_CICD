@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Test') {
             agent {
-                label "ag1"
+                label "a2"
             }
             
             steps {
