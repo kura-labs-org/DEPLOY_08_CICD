@@ -4,11 +4,7 @@ pipeline {
     }
     
  environment {
-   DOCKERHUB_CREDENTIALS = credentials("dockerhub-pw")
-     
-   registry = "andrewdass/my_app_project"
-   registryCredential = 'andrewdass'
-   dockerImage = 'andrewdass/my_app_project' 
+   DOCKERHUB_CREDENTIALS = credentials("ad-docker-pw")
 }
 
     stages {
