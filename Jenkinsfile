@@ -25,6 +25,7 @@ pipeline {
       sh ''' 
         npm install cypress
         npm install mocha
+        npx browserslist@latest --update-db
         npx cypress run --spec ./cypress/integration/test.spec.js
         '''
       }
