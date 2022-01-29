@@ -25,6 +25,10 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                label "ag1"
+            }
+            
             steps {
                 echo 'Testing..'
                 
