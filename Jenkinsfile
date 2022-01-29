@@ -24,10 +24,12 @@ pipeline {
       steps {
       sh ''' 
         npm install cypress
-        npm audit fix
+        
         npm install mocha
         
         npx cypress run --spec ./cypress/integration/test.spec.js
+        
+        npm test
        
         '''
       }
