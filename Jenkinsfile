@@ -24,13 +24,11 @@ pipeline {
       steps {
       sh ''' 
         npm install cypress
-        npm audit fix --force
+        npm audit fix
         npm install mocha
-        npm audit fix --force
-        npx browserslist@latest --update-db
-        npm audit fix --force
+        
         npx cypress run --spec ./cypress/integration/test.spec.js
-        npm audit fix --force
+       
         '''
       }
       post {
