@@ -4,7 +4,7 @@ pipeline {
     }
     
  environment {
-   DOCKERHUB_CREDENTIALS = credentials("ad-docker-pw")
+   DOCKERHUB_CREDENTIALS = credentials("dockerhub-pw")
 }
 
     stages {
