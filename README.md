@@ -7,7 +7,7 @@
 * 3rd EC2 - Production <br>
 
 2. **Creating the Master:**
-Create an three Amazon EC2. In this demonstration, Ubuntu AMI's was used. Run the following commands to install Jenkins:
+In this demonstration, Ubuntu AMI's was used. Run the following commands to install Jenkins:
 ```
 sudo apt search openjdk
 ```
@@ -111,6 +111,9 @@ After running the cat command, the line of random numbers and letters is your pa
         <img style="float: center;" src=/deployment8/task1/10.png width="1000" />
      </h1>
 </html> 
+Steps 1-7 can be repeated to install Jenkins for the ec2 that is the Jenkins agent <br>
+<br>
+
 8. On the side bar, click 'Manage Jenkins'
 
 <html>
@@ -162,8 +165,30 @@ Enter your pem key down below that was used to access the EC2 agent:
 
 13. On the 3rd EC2, install Docker:
 ```
+sudo apt-get update
+```
 
 ```
+ sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+```
+ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+```
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+Refer to the official Docker website for further instructions and explanations: <br>
+https://docs.docker.com/engine/install/debian/
+<br>
+<br>
 14. On the master EC2 run the command:
 ```
 sudo nano key.pem
@@ -194,10 +219,6 @@ sudo 400 chmod key.pem
 Then retry connecting to an EC2 agent
 
 # Task 2
-
-# Task 3
-
-# Task 4
 1. Place all the files to an application in one folder that is accessible from your computer
 <html>
      <h1>
@@ -296,7 +317,12 @@ curl localhost:5000
      </h1>
 </html> 
 
-6. To push the image from the EC2 to a Dockerhub account from the terminal, wrtie the command "sudo docker login" 
+# Task 3
+
+# Task 4
+
+
+1. To push the image from the EC2 to a Dockerhub account from the terminal, wrtie the command "sudo docker login" 
 ```
 sudo docker login
 ```
@@ -310,14 +336,14 @@ sudo docker login
 * image name - The name that is given to the image, which can be anything
 <br>
 
-7. Push the image
+2. Push the image
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task4/15.png width="1000" />
      </h1>
 </html> 
 
-8. Go to the Dockerhub account that the image was pushed to and confirm if it was pushed
+3. Go to the Dockerhub account that the image was pushed to and confirm if it was pushed
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task4/16.png width="1000" />
