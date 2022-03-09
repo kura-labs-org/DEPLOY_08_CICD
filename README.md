@@ -380,49 +380,4 @@ sudo apt install software-properties-common
      </h1>
 </html> 
 
-```
-sudo apt-add-repository ppa:ansible/ansible
-```
-<html>
-     <h1>
-        <img style="float: center;" src=/deployment8/task5/3.png width="1000" />
-     </h1>
-</html> 
 
-3. Update the instance again
-```
-sudo apt update
-```
-
-<html>
-     <h1>
-        <img style="float: center;" src=/deployment8/task5/4.png width="1000" />
-     </h1>
-</html> 
-
-4. Install ansible
-```
-sudo apt install ansible
-```
-<html>
-     <h1>
-        <img style="float: center;" src=/deployment8/task5/5.png width="1000" />
-     </h1>
-</html> 
-
-5. Update the EC2 again
-```
-sudo apt-get update
-```
-
-6. Install Python
-```
-sudo apt-get install python
-```
-<html>
-     <h1>
-        <img style="float: center;" src=/deployment8/task5/7.png width="1000" />
-     </h1>
-</html> 
-
-7. 
