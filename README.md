@@ -371,7 +371,8 @@ sudo apt-get-update
      </h1>
 </html> 
 
-2. This EC2 will be configured through a more automated process by using Ansible. A few installation steps is required to run Ansible, which are shown down below: ```
+2. This EC2 will be configured through a more automated process by using Ansible. A few installation steps is required to run Ansible, which are shown down below: 
+```
 sudo apt install software-properties-common
 ```
 <html>
