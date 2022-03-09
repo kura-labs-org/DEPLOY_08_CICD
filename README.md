@@ -360,7 +360,7 @@ sudo docker login
 </html> 
 
 # Task 5
-## Run a security check on the application by using a Cloudwatch alarm to assess CPU utilization after stress testing the application on an EC2 instance
+## Run a security check on the application by using a Cloudwatch alarm to assess CPU utilization after stress testing the application on a new EC2 instance
 1. Update the master EC2 package list
 ```
 sudo apt-get-update
@@ -427,4 +427,168 @@ sudo apt-get install python
      </h1>
 </html> 
 
-7. 
+7. Enter the EC2's ssh directory:
+```
+cd .ssh
+```
+```
+ls
+```
+```
+sudo apt-add-repository ppa:ansible/ansible
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/3.png width="1000" />
+     </h1>
+</html> 
+
+3. Update the instance again
+```
+sudo apt update
+```
+
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/4.png width="1000" />
+     </h1>
+</html> 
+
+4. Install ansible
+```
+sudo apt install ansible
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/5.png width="1000" />
+     </h1>
+</html> 
+
+5. Update the EC2 again
+```
+sudo apt-get update
+```
+
+6. Install Python
+```
+sudo apt-get install python
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/8.png width="1000" />
+     </h1>
+</html> 
+
+7. If there is no id_rsa and id_rsa.pub present, then create them by using the 'ssh-keygen' command. id_rsa and id_rsa.pub are private and public keys respectively. 
+```
+ssh-keygen
+```
+Run the ls command to see if 
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/9.png width="1000" />
+     </h1>
+</html> 
+8. Retrieve the public key from the master EC2:
+```
+cat id_rsa.pub
+```
+Copy the entire key from running the cat command
+9. Create a new EC2 instance. After creating a new instance, enter into the ssh directory and edit the "authorized_keys" file by pasting the public key from the master EC2:
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/11.png width="1000" />
+     </h1>
+</html> 
+10. In the master EC2, enter the directory '/etc/ansible' and edit the hosts file:
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/12.png width="1000" />
+     </h1>
+</html> 
+11. In the hosts file, write the following:
+```
+[Automate]
+agent1 ansible_ssh_host= Private IPv4 Address of EC2
+```
+[] - Any word can be entered within the brackets. The word "Automate" is there as the Master is responsible for automating the following EC2 under the "Automate" heading.
+agent1 ansible_ssh_host - Specify the agent that is desired to connect to and the method for doing so
+Private IPv4 Address of EC2 - To ensure the Master can always connect to the EC2 agent
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/13.png width="1000" />
+     </h1>
+</html> 
+
+12. Create a yaml file:
+```
+sudo nano agent_script.yaml
+```
+The yaml file can be named anything as long as it contains the ".yaml" extension. In this demonstration it is named agent_script.yaml. 
+13. Include the following code in the yaml file:
+```
+
+---
+
+- hosts: all
+  become: yes
+  tasks:
+  - name: Install packages
+    apt:
+      name: 
+      - stress-ng
+      state: latest
+
+```
+Save the changes to the yaml file and then exit after saving
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/20.png width="1000" />
+     </h1>
+</html> 
+
+14. In the terminal, run the yaml file by using the 'ansible-playbook' command
+```
+ansible-playbook "nameofyamlfile".yaml
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/19.png width="1000" />
+     </h1>
+</html> 
+15. After running the ansible-playbook command, the Master should have configure the agent to download the stress-ng package. To confirm this, run the "stress-ng" command in the agent EC2:
+```
+stress-ng
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/21.png width="1000" />
+     </h1>
+</html> 
+
+Another stress command to run is:
+```
+stress-ng --matrix 1 -t 1m
+```
+1 -t 1m means one stress test is runned for one minute to assess the application undergoing a stress test for that time
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/22.png width="1000" />
+     </h1>
+</html> 
+16. Go to the AWS Console to how the stress test affected the CPU Utilization Average of the EC2:
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/23.png width="1000" />
+     </h1>
+</html> 
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/24.png width="1000" />
+     </h1>
+</html> 
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/25.png width="1000" />
+     </h1>
+</html> 
