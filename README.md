@@ -1,6 +1,7 @@
 # DEPLOY_08_CICD
 
 # Task 1
+## Create 3 EC2's, one EC2 will be a Jenkins master and second EC2 is a Jenkins agent and the third you will use for production
 1. Create 3 EC2's: <br>
 * 1st EC2 - Jenkins Master
 * 2nd EC2 - Jenkins Agent
@@ -219,6 +220,7 @@ sudo 400 chmod key.pem
 Then retry connecting to an EC2 agent
 
 # Task 2
+## Build the application and then create build steps for the application
 1. Place all the files to an application in one folder that is accessible from your computer
 <html>
      <h1>
@@ -318,9 +320,10 @@ curl localhost:5000
 </html> 
 
 # Task 3
+## Create a test step that will test the application front end 
 
 # Task 4
-
+## Create an image of the application and push the image to Dockerhub
 
 1. To push the image from the EC2 to a Dockerhub account from the terminal, wrtie the command "sudo docker login" 
 ```
@@ -357,3 +360,4 @@ sudo docker login
 </html> 
 
 # Task 5
+## Run a security check on the application by using a Cloudwatch alarm to assess CPU utilization after stress testing the application 
