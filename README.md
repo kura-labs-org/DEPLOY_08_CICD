@@ -360,4 +360,68 @@ sudo docker login
 </html> 
 
 # Task 5
-## Run a security check on the application by using a Cloudwatch alarm to assess CPU utilization after stress testing the application 
+## Run a security check on the application by using a Cloudwatch alarm to assess CPU utilization after stress testing the application on an EC2 instance
+1. Update the master EC2 package list
+```
+sudo apt-get-update
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/1.png width="1000" />
+     </h1>
+</html> 
+
+2. This EC2 will be configured through a more automated process by using Ansible. A few installation steps is required to run Ansible, which are shown down below: ```
+sudo apt install software-properties-common
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/2.png width="1000" />
+     </h1>
+</html> 
+```
+sudo apt-add-repository ppa:ansible/ansible
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/3.png width="1000" />
+     </h1>
+</html> 
+
+3. Update the instance again
+```
+sudo apt update
+```
+
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/4.png width="1000" />
+     </h1>
+</html> 
+
+4. Install ansible
+```
+sudo apt install ansible
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/5.png width="1000" />
+     </h1>
+</html> 
+
+5. Update the EC2 again
+```
+sudo apt-get update
+```
+
+6. Install Python
+```
+sudo apt-get install python
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task5/7.png width="1000" />
+     </h1>
+</html> 
+
+7. 
