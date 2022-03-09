@@ -22,10 +22,12 @@ pipeline {
         label 'ag1'
       }
       steps {
-      sh ''' 
-
+      sh '''
+        npm install cypress
         
-        npm test
+        npm install mocha
+        
+        npx cypress run --spec ./cypress/integration/test.spec.js
        
         '''
       }
