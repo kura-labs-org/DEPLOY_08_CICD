@@ -337,23 +337,6 @@ If there are issues downloading or using the "Maven Intregration" plugin, an alt
 <br>
 <br>
 3. Install the following packages:
-     * default-jre
-     * git
-     * nodejs
-     * npm
-     * maven
-     * libgtk2.0-0
-     * libgtk-3-0
-     * libgbm-dev
-     * libnotify-dev
-     * libgconf-2-4
-     * libnss3
-     * libxss1
-     * libasound2
-     * libxtst6
-     * xauth
-     * xvfb
-
 ```
 sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 ```
@@ -364,10 +347,6 @@ sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-
      </h1>
 </html> 
 4. Create a file named "Jenkinsfile" in the Github repository that contains the application source code. Include the following below in the Jenkinsfile:
-```
-
-```
-
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task3/8.png width="1000" />
@@ -384,7 +363,7 @@ sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-
 # Task 4
 ## Create an image of the application and push the image to Dockerhub
 
-1. To push the image from the EC2 to a Dockerhub account from the terminal, wrtie the command "sudo docker login" 
+1. To push the image from the EC2 to a Dockerhub account from the terminal, write the command "sudo docker login" 
 ```
 sudo docker login
 ```
