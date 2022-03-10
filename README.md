@@ -333,7 +333,9 @@ If there are issues downloading or using the "Maven Intregration" plugin, an alt
         <img style="float: center;" src=/deployment8/task3/5.png width="1000" />
      </h1>
 </html> 
-2. Make a multi-branch pipeline in Jenkins and connect it to your Github account to access the application's source code
+2. Make a multi-branch pipeline in Jenkins and connect it to your Github account to access the application's source code 
+<br>
+<br>
 3. Install the following packages:
      * default-jre
      * git
@@ -363,43 +365,7 @@ sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-
 </html> 
 4. Create a file named "Jenkinsfile" in the Github repository that contains the application source code. Include the following below in the Jenkinsfile:
 ```
-pipeline {
-    
-  tools {nodejs "node"}
-  
-  agent {
-      label 'ag1'
-  }
-  stages {
-    stage ('Build') {
-      steps {
-      
-      sh '''
-        npm install
-        npm run build
-        sudo npm install -g serve
-        serve -s build &
-        '''
-      }
-    }
-    stage ('Test') {
-      agent {
-        label 'ag1'
-      }
-      steps {
-      sh '''
-        npm install cypress
-        
-        npm install mocha       
-       
-        '''
-      }
-   
 
-
-    }
-  }
-} 
 ```
 
 <html>
