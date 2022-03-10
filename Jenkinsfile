@@ -32,12 +32,19 @@ pipeline {
        
         '''
       }
-      post {
-        always {
-          junit 'results/cypress-report.xml'
-        }
-          
+        
+      
+    stage ('Deploy') {
+      agent {
+        label 'ag1'
       }
+      steps {
+      echo '''
+        Deploying application
+        '''
+      }     
+        
+        
     }
   }
 } 
