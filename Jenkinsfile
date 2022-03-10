@@ -29,16 +29,12 @@ pipeline {
        
         '''
       }
-    stage ('Deploy') {
-      agent {
-        label 'ag1'
-      }
+    
+    stage('Deploy') {
       steps {
-      echo '''
-        Deploying application       
-       
-        '''
-      }
+              echo 'Deploying application'
+            }
+        }
     
     
     }
