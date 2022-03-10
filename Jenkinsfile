@@ -1,7 +1,6 @@
 pipeline {
     
   tools {nodejs "node"}
-
   
   agent {
       label 'ag1'
@@ -28,24 +27,19 @@ pipeline {
         
         npm install mocha
         
+        npm run --spec ./cypress/integration/test.spec.js
        
        
         '''
       }
-        
-      
+    
     stage ('Deploy') {
       agent {
         label 'ag1'
       }
       steps {
-      echo '''
-        Deploying application
-        '''
-      }     
-        
-        
+      echo ''' Deploying application '''
+      }
     }
   }
 } 
-}
