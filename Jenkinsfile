@@ -17,26 +17,21 @@ pipeline {
         '''
       }
     }
-        stage ('Test') {
-          agent {
-            label 'ag1'
-          }
-          steps {
-          sh '''
-            npm install cypress
+    stage ('Test') {
+      agent {
+        label 'ag1'
+      }
+      steps {
+      sh '''
+        npm install cypress
+        
+        npm install mocha       
+       
+        '''
+      }
+   
 
-            npm install mocha       
 
-            '''
-          }
-    
-            stage('Deploy') {
-              steps {
-                      echo 'Deploying application'
-                    }
-                }
-    
-    
     }
   }
 } 
