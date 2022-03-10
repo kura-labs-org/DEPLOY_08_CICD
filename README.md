@@ -321,6 +321,97 @@ curl localhost:5000
 
 # Task 3
 ## Create a test step that will test the application front end 
+1. Go to "Manage Jenkins" and install the "Amazon EC2" and "Maven Integration" plugins
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task3/4.png width="1000" />
+     </h1>
+</html> 
+If there are issues downloading or using the "Maven Intregration" plugin, an alternative is to install Maven directly through the terminal
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task3/5.png width="1000" />
+     </h1>
+</html> 
+2. Make a multi-branch pipeline and connect Jenkins to your Github account to access the application's source code
+3. Install the following packages:
+* default-jre
+* git
+* nodejs
+* npm
+* maven
+* libgtk2.0-0
+* libgtk-3-0
+* libgbm-dev
+* libnotify-dev
+* libgconf-2-4
+* libnss3
+* libxss1
+* libasound2
+* libxtst6
+* xauth
+* xvfb
+```
+sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+```
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task3/6.png width="1000" />
+     </h1>
+</html> 
+4. Create a file named "Jenkinsfile" in the Github repository that contains the application source code. Include the following below in the Jenkinsfile:
+```
+pipeline {
+    
+  tools {nodejs "node"}
+  
+  agent {
+      label 'ag1'
+  }
+  stages {
+    stage ('Build') {
+      steps {
+      
+      sh '''
+        npm install
+        npm run build
+        sudo npm install -g serve
+        serve -s build &
+        '''
+      }
+    }
+    stage ('Test') {
+      agent {
+        label 'ag1'
+      }
+      steps {
+      sh '''
+        npm install cypress
+        
+        npm install mocha       
+       
+        '''
+      }
+   
+
+
+    }
+  }
+} 
+```
+
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task3/8.png width="1000" />
+     </h1>
+</html> 
+
+5. In Jenkins, test the application by running the pipeline:
+<html>
+     <h1>
+        <img style="float: center;" src=/deployment8/task3/7.png width="1000" />
+     </h1>
+</html> 
 
 # Task 4
 ## Create an image of the application and push the image to Dockerhub
