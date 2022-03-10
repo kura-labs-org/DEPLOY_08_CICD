@@ -25,10 +25,17 @@ pipeline {
       sh '''
         npm install cypress
         
-        npm install mocha
-        
-        npm run --spec ./cypress/integration/test.spec.js
+        npm install mocha       
        
+        '''
+      }
+    stage ('Deploy') {
+      agent {
+        label 'ag1'
+      }
+      steps {
+      echo '''
+        Deploying application       
        
         '''
       }
