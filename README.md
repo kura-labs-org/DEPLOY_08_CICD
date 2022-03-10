@@ -337,7 +337,7 @@ If there are issues downloading or using the "Maven Intregration" plugin, an alt
 <br>
 <br>
 3. Install the following packages:
-```
+``` 
 sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 ```
 
@@ -372,9 +372,9 @@ sudo docker login
         <img style="float: center;" src=/deployment8/task4/13.png width="1000" />
      </h1>
 </html> 
-* The image should be named username/image name
-* username - The same name of your account username
-* image name - The name that is given to the image, which can be anything
+- The image should be named username/image name
+- username - The same name of your account username
+- image name - The name that is given to the image, which can be anything
 <br>
 
 2. Push the image
