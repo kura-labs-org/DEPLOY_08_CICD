@@ -335,25 +335,27 @@ If there are issues downloading or using the "Maven Intregration" plugin, an alt
 </html> 
 2. Make a multi-branch pipeline in Jenkins and connect it to your Github account to access the application's source code
 3. Install the following packages:
-* default-jre
-* git
-* nodejs
-* npm
-* maven
-* libgtk2.0-0
-* libgtk-3-0
-* libgbm-dev
-* libnotify-dev
-* libgconf-2-4
-* libnss3
-* libxss1
-* libasound2
-* libxtst6
-* xauth
-* xvfb
+     * default-jre
+     * git
+     * nodejs
+     * npm
+     * maven
+     * libgtk2.0-0
+     * libgtk-3-0
+     * libgbm-dev
+     * libnotify-dev
+     * libgconf-2-4
+     * libnss3
+     * libxss1
+     * libasound2
+     * libxtst6
+     * xauth
+     * xvfb
+
 ```
 sudo apt install default-jre git nodejs npm maven libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 ```
+
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task3/6.png width="1000" />
