@@ -333,11 +333,9 @@ If there are issues downloading or using the "Maven Intregration" plugin, an alt
         <img style="float: center;" src=/deployment8/task3/5.png width="1000" />
      </h1>
 </html> 
-2. Make a multi-branch pipeline in Jenkins and connect it to your Github account to access the application's source code 
-<br>
+2. Make a multi-branch pipeline in Jenkins and connect it to your Github account to access the application's source code <br>
 <br>
 3. Install the following packages
-
 <html>
      <h1>
         <img style="float: center;" src=/deployment8/task3/6.png width="1000" />
