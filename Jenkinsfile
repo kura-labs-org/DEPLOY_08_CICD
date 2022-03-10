@@ -33,13 +33,7 @@ pipeline {
         '''
       }
     
-    stage ('Deploy') {
-      agent {
-        label 'ag1'
-      }
-      steps {
-      echo ''' Deploying application '''
-      }
+    
     }
   }
 } 
